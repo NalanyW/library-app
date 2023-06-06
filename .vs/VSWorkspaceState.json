@@ -1,0 +1,9 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Data",
+    "\\Data\\Migrations"
+  ],
+  "SelectedNode": "\\Data\\Migrations\\00000000000000_CreateIdentitySchema.cs",
+  "PreviewInSolutionExplorer": false
+}
