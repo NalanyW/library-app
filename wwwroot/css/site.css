@@ -18,5 +18,10 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    background-color: cadetblue;
+    margin-bottom: 60px;
+}
+
+.footer {
+    background-color:skyblue;
 }

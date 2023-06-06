@@ -59,6 +59,7 @@ namespace SoftwareDevelopment2.Controllers
         }
 
         // [] = Decorator
+        // unless you've been logged in
         [Authorize]
 
         // GET: Books/Create
@@ -70,6 +71,8 @@ namespace SoftwareDevelopment2.Controllers
         // POST: Books/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Title,Author,Price,YearOfRelease,Location,Id")] Book book)
@@ -84,6 +87,7 @@ namespace SoftwareDevelopment2.Controllers
         }
 
         // GET: Books/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Book == null)
@@ -102,6 +106,7 @@ namespace SoftwareDevelopment2.Controllers
         // POST: Books/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Title,Author,Price,YearOfRelease,Location,Id")] Book book)
@@ -135,6 +140,7 @@ namespace SoftwareDevelopment2.Controllers
         }
 
         // GET: Books/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Book == null)
@@ -155,6 +161,7 @@ namespace SoftwareDevelopment2.Controllers
         // POST: Books/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Book == null)
