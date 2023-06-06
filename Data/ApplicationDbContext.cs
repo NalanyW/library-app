@@ -13,5 +13,6 @@ namespace SoftwareDevelopment2.Data
         public DbSet<SoftwareDevelopment2.Models.Course> Course { get; set; } = default!;
         public DbSet<SoftwareDevelopment2.Models.Student> Student { get; set; } = default!;
         public DbSet<SoftwareDevelopment2.Models.Teacher> Teacher { get; set; } = default!;
+        public DbSet<SoftwareDevelopment2.Models.Book> Book { get; set; } = default!;
     }
 }
