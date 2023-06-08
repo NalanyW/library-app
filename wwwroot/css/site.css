@@ -1,5 +1,6 @@
 html {
   font-size: 14px;
+  
 }
 
 @media (min-width: 768px) {
@@ -18,10 +19,10 @@ html {
 }
 
 body {
-    background-color: cadetblue;
     margin-bottom: 60px;
+    background-color: cadetblue;
 }
 
 .footer {
-    background-color:skyblue;
+    background-color:powderblue;
 }
