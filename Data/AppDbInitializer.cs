@@ -141,6 +141,7 @@ namespace SoftwareDevelopment2.Data
 							Location = "verdieping3"
 						},
 					});
+					context.SaveChanges();
 				}
 
 				/*if (!context.Item.Any())
