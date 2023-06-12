@@ -24,10 +24,35 @@ namespace SoftwareDevelopment2.Data
 					});
 				}*/
 
-				/*if (!context.Student.Any())
+				if (!context.Student.Any())
 				{
-					context.Student.AddRange(new List<student>()
-				}*/
+					context.Student.AddRange(new List<Student>()
+					{
+						new Student()
+						{
+							FirstName = "Jan",
+							LastName = "Zuur",
+							Email = "placeholder"
+							/*there needs to be a connection to the course*/
+						},
+
+						new Student()
+						{
+							FirstName = "Jan",
+							LastName = "Zuur",
+							Email = "placeholder"
+							/*there needs to be a connection to the course*/
+						},
+
+						new Student()
+						{
+							FirstName = "Jan",
+							LastName = "Zuur",
+							Email = "placeholder"
+							/*there needs to be a connection to the course*/
+						},
+					});
+				}
 
 				if (!context.Teacher.Any())
 				{
@@ -46,6 +71,7 @@ namespace SoftwareDevelopment2.Data
 							FirstName = "Jan",
 							LastName = "Zuur",
 							Email = "placeholder"
+							/*there needs to be a connection to the course*/
 						},
 
 						new Teacher()
@@ -53,6 +79,7 @@ namespace SoftwareDevelopment2.Data
 							FirstName = "Jan",
 							LastName = "Zuur",
 							Email = "placeholder"
+							/*there needs to be a connection to the course*/
 						},
 					});
 				};
