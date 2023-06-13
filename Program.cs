@@ -22,6 +22,9 @@ namespace SoftwareDevelopment2
 
             var app = builder.Build();
 
+            // Seed data
+            AppDbInitializer.SeedData(app);
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
