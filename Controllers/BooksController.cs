@@ -29,6 +29,7 @@ namespace SoftwareDevelopment2.Controllers
         }
 
         // GET: Show form Books
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ShowSearchForm()
         {
             return View();

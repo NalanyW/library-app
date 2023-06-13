@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using SoftwareDevelopment2.Models;
+using System.Data;
 
 namespace SoftwareDevelopment2.Data
 {
 	public class AppDbInitializer
 	{
-		public static void SeedData(IApplicationBuilder applicationBuilder)
+		public static async void SeedData(IApplicationBuilder applicationBuilder)
 		{
 			using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
 			{
@@ -13,30 +16,34 @@ namespace SoftwareDevelopment2.Data
 
 				context.Database.EnsureCreated();
 
-                context.Roles.AddRange(new List<IdentityRole>()
-				{
-					new IdentityRole("Admin"),
-                    new IdentityRole("Employee"),
-					new IdentityRole("User"),
+				var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-                });
+                string[] roles = new string[] { "Admin", "Employee", "User"};
 
-				var admin = new IdentityUser("admin")
-				{
-					Email = "admin@gmail.com"
-				};
-
-                var password = new PasswordHasher<IdentityUser>();
-				var hashed = password.HashPassword(admin, "password");
-				admin.PasswordHash = hashed;
-
-                context.Users.AddRange(new List<IdentityUser>()
+                for (int i = 0; i < roles.Length; i++)
                 {
-                    admin,
-                    new IdentityUser("Employee"),
-                    new IdentityUser("User"),
+					if (!await roleManager.RoleExistsAsync(roles[i]))
+						await roleManager.CreateAsync(new IdentityRole(roles[i]));
+                }
 
-                });
+				var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+				string email = "admin@admin.com";
+				string password = "Test1234,";
+
+				if (await userManager.FindByEmailAsync(email) == null)
+				{
+					var admin = new IdentityUser();
+					admin.UserName = email;
+					admin.Email = email;
+					admin.EmailConfirmed = true;
+
+					await userManager.CreateAsync(admin, password);
+
+					await userManager.AddToRoleAsync(admin, "Admin");
+				}
+
+
 
                 if (!context.Book.Any())
 				{
@@ -67,12 +74,15 @@ namespace SoftwareDevelopment2.Data
 							Price = 8.99,
 							YearOfRelease = 1999,
 							Location = "verdieping3"
-						},
-					});
-					context.SaveChanges();
-				}
+                        },
+                    });
+                }
 
-				/*if (!context.Item.Any())
+                //await AssignRoles(serviceScope.ServiceProvider, admin.Email, "Admin");
+
+                await context.SaveChangesAsync();
+
+                /*if (!context.Item.Any())
 				{
 					context.Item.AddRange(new List<Item>()
 					{
@@ -93,19 +103,21 @@ namespace SoftwareDevelopment2.Data
 					});
 				}*/
 
-				/*if (!context.Roles.Any())
+                /*if (!context.Roles.Any())
 				{
 
 				}*/
 
+            }
+        }
 
+        public static async Task<IdentityResult> AssignRoles(IServiceProvider services, string email, string role)
+        {
+            UserManager<IdentityUser> _userManager = services.GetService<UserManager<IdentityUser>>();
+            IdentityUser user = await _userManager.FindByEmailAsync(email);
+            var result = await _userManager.AddToRoleAsync(user, role);
 
-
-
-
-
-
-			}
-		}
-	}
+            return result;
+        }
+    }
 }
