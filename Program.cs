@@ -1,6 +1,11 @@
+//Nalany Sturm S1170431
+//Gianni van Looij S1185704
+
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SoftwareDevelopment2.Data;
+using SoftwareDevelopment2.Models;
 using System.Security.Claims;
 
 namespace SoftwareDevelopment2

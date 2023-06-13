@@ -45,38 +45,38 @@ namespace SoftwareDevelopment2.Data
 
 
 
-                if (!context.Book.Any())
-				{
-					context.Book.AddRange(new List<Book>()
-					{
-						new Book()
-						{
-							Title = "Harry Potter and the Philosopher's Stone",
-							Author = "J.K Rowling",
-							Price = 8.99,
-							YearOfRelease = 1997,
-							Location = "verdieping1"
-						},
+    //            if (!context.Books.Any())
+				//{
+				//	context.Books.AddRange(new List<Book>()
+				//	{
+				//		new Book()
+				//		{
+				//			Title = "Harry Potter and the Philosopher's Stone",
+				//			Author = "J.K Rowling",
+				//			Price = 8.99,
+				//			YearOfRelease = 1997,
+				//			Location = "verdieping1"
+				//		},
 
-						new Book()
-						{
-							Title = "Harry Potter and the Chamber of Secrets",
-							Author = "J.K Rowling",
-							Price = 8.99,
-							YearOfRelease = 1998,
-							Location = "verdieping2"
-						},
+				//		new Book()
+				//		{
+				//			Title = "Harry Potter and the Chamber of Secrets",
+				//			Author = "J.K Rowling",
+				//			Price = 8.99,
+				//			YearOfRelease = 1998,
+				//			Location = "verdieping2"
+				//		},
 
-						new Book()
-						{
-							Title = "Harry Potter and the Prisoner of Azkaban",
-							Author = "J.K Rowling",
-							Price = 8.99,
-							YearOfRelease = 1999,
-							Location = "verdieping3"
-                        },
-                    });
-                }
+				//		new Book()
+				//		{
+				//			Title = "Harry Potter and the Prisoner of Azkaban",
+				//			Author = "J.K Rowling",
+				//			Price = 8.99,
+				//			YearOfRelease = 1999,
+				//			Location = "verdieping3"
+    //                    },
+    //                });
+    //            }
 
                 //await AssignRoles(serviceScope.ServiceProvider, admin.Email, "Admin");
 
@@ -111,13 +111,13 @@ namespace SoftwareDevelopment2.Data
             }
         }
 
-        public static async Task<IdentityResult> AssignRoles(IServiceProvider services, string email, string role)
-        {
-            UserManager<IdentityUser> _userManager = services.GetService<UserManager<IdentityUser>>();
-            IdentityUser user = await _userManager.FindByEmailAsync(email);
-            var result = await _userManager.AddToRoleAsync(user, role);
+        //public static async Task<IdentityResult> AssignRoles(IServiceProvider services, string email, string role)
+        //{
+        //    UserManager<IdentityUser> _userManager = services.GetService<UserManager<IdentityUser>>();
+        //    IdentityUser user = await _userManager.FindByEmailAsync(email);
+        //    var result = await _userManager.AddToRoleAsync(user, role);
 
-            return result;
-        }
+        //    return result;
+        //}
     }
 }

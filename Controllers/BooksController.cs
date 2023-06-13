@@ -23,8 +23,8 @@ namespace SoftwareDevelopment2.Controllers
         // GET: Books
         public async Task<IActionResult> Index()
         {
-              return _context.Book != null ? 
-                          View(await _context.Book.ToListAsync()) :
+              return _context.Books != null ? 
+                          View(await _context.Books.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Book'  is null.");
         }
 
@@ -38,18 +38,18 @@ namespace SoftwareDevelopment2.Controllers
         // POST: form Books
         public async Task<IActionResult> ShowSearchResult(string SearchPhrase)
         {
-            return View("Index", await _context.Book.Where(book => book.Title.Contains(SearchPhrase)).ToListAsync());
+            return View("Index", await _context.Books.Where(book => book.Title.Contains(SearchPhrase)).ToListAsync());
         }
 
         // GET: Books/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Book == null)
+            if (id == null || _context.Books == null)
             {
                 return NotFound();
             }
 
-            var book = await _context.Book
+            var book = await _context.Books
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (book == null)
             {
@@ -91,12 +91,12 @@ namespace SoftwareDevelopment2.Controllers
         [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Book == null)
+            if (id == null || _context.Books == null)
             {
                 return NotFound();
             }
 
-            var book = await _context.Book.FindAsync(id);
+            var book = await _context.Books.FindAsync(id);
             if (book == null)
             {
                 return NotFound();
@@ -144,12 +144,12 @@ namespace SoftwareDevelopment2.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Book == null)
+            if (id == null || _context.Books == null)
             {
                 return NotFound();
             }
 
-            var book = await _context.Book
+            var book = await _context.Books
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (book == null)
             {
@@ -165,14 +165,14 @@ namespace SoftwareDevelopment2.Controllers
         [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Book == null)
+            if (_context.Books == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Book'  is null.");
             }
-            var book = await _context.Book.FindAsync(id);
+            var book = await _context.Books.FindAsync(id);
             if (book != null)
             {
-                _context.Book.Remove(book);
+                _context.Books.Remove(book);
             }
             
             await _context.SaveChangesAsync();
@@ -181,7 +181,7 @@ namespace SoftwareDevelopment2.Controllers
 
         private bool BookExists(int id)
         {
-          return (_context.Book?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Books?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

@@ -1,0 +1,78 @@
+﻿@model SoftwareDevelopment2.Models.Subscription
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Subscription</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AgeGroup" class="control-label"></label>
+                <div class="col-md-10">
+                    <select asp-for="AgeGroup" asp-items="Html.GetEnumSelectList<AgeGroup>()">
+                        <option selected="selected" value="">Please select</option>
+                    </select>
+                    <span asp-validation-for="AgeGroup" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemsPerYear" class="control-label"></label>
+                <input asp-for="ItemsPerYear" class="form-control" />
+                <span asp-validation-for="ItemsPerYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemsAtSameTime" class="control-label"></label>
+                <input asp-for="ItemsAtSameTime" class="form-control" />
+                <span asp-validation-for="ItemsAtSameTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LoanPeriodInDays" class="control-label"></label>
+                <input asp-for="LoanPeriodInDays" class="form-control" />
+                <span asp-validation-for="LoanPeriodInDays" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExtendsInARow" class="control-label"></label>
+                <input asp-for="ExtendsInARow" class="form-control" />
+                <span asp-validation-for="ExtendsInARow" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReservationCost" class="control-label"></label>
+                <input asp-for="ReservationCost" class="form-control" />
+                <span asp-validation-for="ReservationCost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FinePerItemPerDay" class="control-label"></label>
+                <input asp-for="FinePerItemPerDay" class="form-control" />
+                <span asp-validation-for="FinePerItemPerDay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubscriptionCostPerMonth" class="control-label"></label>
+                <input asp-for="SubscriptionCostPerMonth" class="form-control" />
+                <span asp-validation-for="SubscriptionCostPerMonth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -8,7 +8,6 @@
         public double Price { get; set; }
         public int YearOfRelease { get; set; }
         public string Location { get; set; }
-
         //contructor
         public Book()
         {
