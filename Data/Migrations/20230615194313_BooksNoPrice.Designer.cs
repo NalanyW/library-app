@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SoftwareDevelopment2.Data;
 
@@ -11,9 +12,11 @@ using SoftwareDevelopment2.Data;
 namespace SoftwareDevelopment2.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230615194313_BooksNoPrice")]
+    partial class BooksNoPrice
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,141 +146,141 @@ namespace SoftwareDevelopment2.Data.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6b09e1fb-2167-4c11-9dbb-e3aae5866cc4",
-                            Email = "Blanche_Turcotte84@yahoo.com",
+                            ConcurrencyStamp = "a8c898b0-4be1-4ee3-b35c-510449f7e91e",
+                            Email = "Pete_Lindgren46@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "4e729b21a3ed9585121d34451bc3303bf424386d",
+                            PasswordHash = "916cd8d4315173bde42534dc6e1a3aa5da0cfea5",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "07e8de70-3329-496a-9dd3-315e862533c0",
+                            SecurityStamp = "7798a13f-926b-4612-a4ee-da2582f6cbe1",
                             TwoFactorEnabled = false,
-                            UserName = "Blanche_Turcotte84@yahoo.com"
+                            UserName = "Pete_Lindgren46@gmail.com"
                         },
                         new
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8df0010d-bed2-4881-9c84-0e258f709520",
-                            Email = "Eduardo_DAmore79@hotmail.com",
+                            ConcurrencyStamp = "f4463818-a98c-4be2-aafb-91a7021cfc5b",
+                            Email = "Dwight_Nienow@hotmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "e695b70d52395b3f6a28a94ccff723345cf9db86",
+                            PasswordHash = "c2514dc5fbf3c9d70736263ef8ddd0c9a870b13b",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ba930388-6af9-4277-95c6-857eaee3dab0",
+                            SecurityStamp = "89f46f34-8b40-4f4e-a1c6-324fe3269102",
                             TwoFactorEnabled = false,
-                            UserName = "Eduardo_DAmore79@hotmail.com"
+                            UserName = "Dwight_Nienow@hotmail.com"
                         },
                         new
                         {
                             Id = "3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cddc3c40-4ab8-449f-8237-ddc0832d520e",
-                            Email = "Everett6@yahoo.com",
+                            ConcurrencyStamp = "498309b9-6e08-4598-8eb1-f98d2cc99b3d",
+                            Email = "Tabitha_Herzog@yahoo.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "38bf5e194e447a56c76194005cd7cdac849c4133",
+                            PasswordHash = "dbe9cbb2d1116d5ca58fb0718aef3288de5c8e01",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a2937c4c-04d7-4408-acf5-938237e98c73",
+                            SecurityStamp = "098e2a13-d810-4b5e-be61-ad1c5cd9cca3",
                             TwoFactorEnabled = false,
-                            UserName = "Everett6@yahoo.com"
+                            UserName = "Tabitha_Herzog@yahoo.com"
                         },
                         new
                         {
                             Id = "4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d46c198f-f8da-43a4-86a8-d242c05552e3",
-                            Email = "Kelvin_Ortiz24@hotmail.com",
+                            ConcurrencyStamp = "e2f77dd4-895b-4ed0-ac1a-9c5b6b8ec4ec",
+                            Email = "Domingo.DAmore27@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "c0bdcabc96b21ef0992778dae3ec4cb2ea692a39",
+                            PasswordHash = "94db2943c54204a9193adcba1c7a4c1e62f8d58e",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b116eacf-0eb9-4f73-aacd-911372a4a832",
+                            SecurityStamp = "1a48f6f5-6155-4669-8cb3-d3b8bd9b4872",
                             TwoFactorEnabled = false,
-                            UserName = "Kelvin_Ortiz24@hotmail.com"
+                            UserName = "Domingo.DAmore27@gmail.com"
                         },
                         new
                         {
                             Id = "5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9deb583d-8c21-4eee-9211-816a8aedb6b3",
-                            Email = "Margarita28@hotmail.com",
+                            ConcurrencyStamp = "91daf7a0-c8dc-465b-ad66-d9e22d5f722d",
+                            Email = "Lula.Weimann72@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "d36b0916d00ee223d533e81c4fbb9bdff3a26094",
+                            PasswordHash = "7b1cb069ca04bd7ec7b922caea978bce8f06474c",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1a14c25f-2de3-4508-978c-df407129ebcb",
+                            SecurityStamp = "dd503a49-d0fa-4074-9014-d3af3107ac2e",
                             TwoFactorEnabled = false,
-                            UserName = "Margarita28@hotmail.com"
+                            UserName = "Lula.Weimann72@gmail.com"
                         },
                         new
                         {
                             Id = "6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "13b20cc4-f3b9-4c03-94b5-ce22cb557def",
-                            Email = "Susan_Connelly86@yahoo.com",
+                            ConcurrencyStamp = "d6397e9f-1e6b-4c3c-91c1-bfacb2809d5d",
+                            Email = "Lucas.Ondricka93@hotmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "b028fa1c4d79851efcce7922bfc094364d63a8cd",
+                            PasswordHash = "6834e259b2f54938abd451a53f1ff5381af24fb4",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a3a12763-18c2-4ef9-a497-29ffa2fb631f",
+                            SecurityStamp = "34e2fd7f-678b-42d0-8240-148de8d3a5b6",
                             TwoFactorEnabled = false,
-                            UserName = "Susan_Connelly86@yahoo.com"
+                            UserName = "Lucas.Ondricka93@hotmail.com"
                         },
                         new
                         {
                             Id = "7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "575b0d84-1925-485e-ac85-b73c9effe7ba",
-                            Email = "Eunice.Weber@yahoo.com",
+                            ConcurrencyStamp = "cd52648a-2f1a-4336-9691-bf0517ff24de",
+                            Email = "Victor42@yahoo.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "c71667f70bb4655d1c3dddaf9c716bdb2f7895f6",
+                            PasswordHash = "6477d969cdd7ccd33c9d8e818fb97f21058f91f4",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ed5509cf-2700-435f-95b6-e527472f7e72",
+                            SecurityStamp = "b9ba9a36-ef2c-4fcb-abb5-d8f4bd8da036",
                             TwoFactorEnabled = false,
-                            UserName = "Eunice.Weber@yahoo.com"
+                            UserName = "Victor42@yahoo.com"
                         },
                         new
                         {
                             Id = "8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d7ce659a-d2ac-4c67-a00a-d9260461c99e",
-                            Email = "Rita_Abbott30@gmail.com",
+                            ConcurrencyStamp = "9d8f6d02-34bd-4216-b1b7-ef736bd3a2ad",
+                            Email = "Otis.Davis@yahoo.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "afd1861bf0c21ac808a246bc1933956edb08b386",
+                            PasswordHash = "754d106fad03a0e9a9499dd4ba56196e94d45102",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2311ac68-d4fd-4df4-b8ae-0806ad8faa7d",
+                            SecurityStamp = "d7991bf2-8e3b-4f70-9f01-643fa1e23025",
                             TwoFactorEnabled = false,
-                            UserName = "Rita_Abbott30@gmail.com"
+                            UserName = "Otis.Davis@yahoo.com"
                         },
                         new
                         {
                             Id = "9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8edfecaa-4842-407d-afd8-f0a7c6fcc63f",
-                            Email = "Austin_Marquardt46@gmail.com",
+                            ConcurrencyStamp = "a3cbedc3-6dc7-4bd8-89f3-17049f10a02a",
+                            Email = "Elena_Kulas56@yahoo.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "4f6c6ae002a47dbcdcd938b95af7c74a3c575a46",
+                            PasswordHash = "85f6e269b4f4dd2d73e77bc1de303cc0da449043",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5ce18c90-8ce7-4324-a709-161b3320a414",
+                            SecurityStamp = "2be223ce-80d8-494b-a11c-ffbc5321f0fd",
                             TwoFactorEnabled = false,
-                            UserName = "Austin_Marquardt46@gmail.com"
+                            UserName = "Elena_Kulas56@yahoo.com"
                         },
                         new
                         {
                             Id = "10",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0b9c2654-b8f6-4ada-a67c-5c0eab7fd578",
-                            Email = "Bethany.Schuster75@gmail.com",
+                            ConcurrencyStamp = "4352585c-1c78-4653-a8f7-d31349fb09da",
+                            Email = "Estelle_Wolf89@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "6faedeb3c3a6e242dc301fc45a8edbc8ff553320",
+                            PasswordHash = "21322fd1c87a632cbc1383b22410fae78f61fca9",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2e1bbb3a-56e3-44a1-bd67-3c46ba97eaec",
+                            SecurityStamp = "fa9c98e6-1649-445f-997c-d38ea8a9a368",
                             TwoFactorEnabled = false,
-                            UserName = "Bethany.Schuster75@gmail.com"
+                            UserName = "Estelle_Wolf89@gmail.com"
                         });
                 });
 
@@ -484,86 +487,6 @@ namespace SoftwareDevelopment2.Data.Migrations
                             Location = "Verdieping 9",
                             Title = "Harry Potter: 9",
                             YearOfRelease = 2006
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Author = "J.K. Rowling",
-                            Location = "Verdieping 10",
-                            Title = "Harry Potter: 10",
-                            YearOfRelease = 2007
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Author = "J.K. Rowling",
-                            Location = "Verdieping 11",
-                            Title = "Harry Potter: 11",
-                            YearOfRelease = 2008
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Author = "J.K. Rowling",
-                            Location = "Verdieping 12",
-                            Title = "Harry Potter: 12",
-                            YearOfRelease = 2009
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Author = "J.K. Rowling",
-                            Location = "Verdieping 13",
-                            Title = "Harry Potter: 13",
-                            YearOfRelease = 2010
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Author = "J.K. Rowling",
-                            Location = "Verdieping 14",
-                            Title = "Harry Potter: 14",
-                            YearOfRelease = 2011
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Author = "J.K. Rowling",
-                            Location = "Verdieping 15",
-                            Title = "Harry Potter: 15",
-                            YearOfRelease = 2012
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Author = "J.K. Rowling",
-                            Location = "Verdieping 16",
-                            Title = "Harry Potter: 16",
-                            YearOfRelease = 2013
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Author = "J.K. Rowling",
-                            Location = "Verdieping 17",
-                            Title = "Harry Potter: 17",
-                            YearOfRelease = 2014
-                        },
-                        new
-                        {
-                            Id = 18,
-                            Author = "J.K. Rowling",
-                            Location = "Verdieping 18",
-                            Title = "Harry Potter: 18",
-                            YearOfRelease = 2015
-                        },
-                        new
-                        {
-                            Id = 19,
-                            Author = "J.K. Rowling",
-                            Location = "Verdieping 19",
-                            Title = "Harry Potter: 19",
-                            YearOfRelease = 2016
                         });
                 });
 
@@ -596,154 +519,74 @@ namespace SoftwareDevelopment2.Data.Migrations
                         new
                         {
                             Id = 1,
-                            EndDate = new DateTime(2023, 7, 6, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9410),
+                            EndDate = new DateTime(2023, 7, 6, 21, 43, 13, 70, DateTimeKind.Local).AddTicks(8932),
                             ItemId = 1,
-                            StartDate = new DateTime(2023, 6, 15, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9361),
+                            StartDate = new DateTime(2023, 6, 15, 21, 43, 13, 70, DateTimeKind.Local).AddTicks(8855),
                             UserId = "1"
                         },
                         new
                         {
                             Id = 2,
-                            EndDate = new DateTime(2023, 7, 6, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9458),
+                            EndDate = new DateTime(2023, 7, 6, 21, 43, 13, 70, DateTimeKind.Local).AddTicks(8975),
                             ItemId = 2,
-                            StartDate = new DateTime(2023, 6, 15, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9457),
+                            StartDate = new DateTime(2023, 6, 15, 21, 43, 13, 70, DateTimeKind.Local).AddTicks(8972),
                             UserId = "2"
                         },
                         new
                         {
                             Id = 3,
-                            EndDate = new DateTime(2023, 7, 6, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9476),
+                            EndDate = new DateTime(2023, 7, 6, 21, 43, 13, 70, DateTimeKind.Local).AddTicks(9007),
                             ItemId = 3,
-                            StartDate = new DateTime(2023, 6, 15, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9474),
+                            StartDate = new DateTime(2023, 6, 15, 21, 43, 13, 70, DateTimeKind.Local).AddTicks(9004),
                             UserId = "3"
                         },
                         new
                         {
                             Id = 4,
-                            EndDate = new DateTime(2023, 7, 6, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9516),
+                            EndDate = new DateTime(2023, 7, 6, 21, 43, 13, 70, DateTimeKind.Local).AddTicks(9039),
                             ItemId = 4,
-                            StartDate = new DateTime(2023, 6, 15, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9515),
+                            StartDate = new DateTime(2023, 6, 15, 21, 43, 13, 70, DateTimeKind.Local).AddTicks(9036),
                             UserId = "4"
                         },
                         new
                         {
                             Id = 5,
-                            EndDate = new DateTime(2023, 7, 6, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9535),
+                            EndDate = new DateTime(2023, 7, 6, 21, 43, 13, 70, DateTimeKind.Local).AddTicks(9077),
                             ItemId = 5,
-                            StartDate = new DateTime(2023, 6, 15, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9534),
+                            StartDate = new DateTime(2023, 6, 15, 21, 43, 13, 70, DateTimeKind.Local).AddTicks(9074),
                             UserId = "5"
                         },
                         new
                         {
                             Id = 6,
-                            EndDate = new DateTime(2023, 7, 6, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9555),
+                            EndDate = new DateTime(2023, 7, 6, 21, 43, 13, 70, DateTimeKind.Local).AddTicks(9112),
                             ItemId = 6,
-                            StartDate = new DateTime(2023, 6, 15, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9553),
+                            StartDate = new DateTime(2023, 6, 15, 21, 43, 13, 70, DateTimeKind.Local).AddTicks(9109),
                             UserId = "6"
                         },
                         new
                         {
                             Id = 7,
-                            EndDate = new DateTime(2023, 7, 6, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9570),
+                            EndDate = new DateTime(2023, 7, 6, 21, 43, 13, 70, DateTimeKind.Local).AddTicks(9145),
                             ItemId = 7,
-                            StartDate = new DateTime(2023, 6, 15, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9569),
+                            StartDate = new DateTime(2023, 6, 15, 21, 43, 13, 70, DateTimeKind.Local).AddTicks(9142),
                             UserId = "7"
                         },
                         new
                         {
                             Id = 8,
-                            EndDate = new DateTime(2023, 7, 6, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9586),
+                            EndDate = new DateTime(2023, 7, 6, 21, 43, 13, 70, DateTimeKind.Local).AddTicks(9178),
                             ItemId = 8,
-                            StartDate = new DateTime(2023, 6, 15, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9585),
+                            StartDate = new DateTime(2023, 6, 15, 21, 43, 13, 70, DateTimeKind.Local).AddTicks(9175),
                             UserId = "8"
                         },
                         new
                         {
                             Id = 9,
-                            EndDate = new DateTime(2023, 7, 6, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9602),
+                            EndDate = new DateTime(2023, 7, 6, 21, 43, 13, 70, DateTimeKind.Local).AddTicks(9213),
                             ItemId = 9,
-                            StartDate = new DateTime(2023, 6, 15, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9601),
+                            StartDate = new DateTime(2023, 6, 15, 21, 43, 13, 70, DateTimeKind.Local).AddTicks(9210),
                             UserId = "9"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            EndDate = new DateTime(2023, 7, 6, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9619),
-                            ItemId = 10,
-                            StartDate = new DateTime(2023, 6, 15, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9618),
-                            UserId = "10"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            EndDate = new DateTime(2023, 7, 6, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9634),
-                            ItemId = 11,
-                            StartDate = new DateTime(2023, 6, 15, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9633),
-                            UserId = "11"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            EndDate = new DateTime(2023, 7, 6, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9675),
-                            ItemId = 12,
-                            StartDate = new DateTime(2023, 6, 15, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9674),
-                            UserId = "12"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            EndDate = new DateTime(2023, 7, 6, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9693),
-                            ItemId = 13,
-                            StartDate = new DateTime(2023, 6, 15, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9692),
-                            UserId = "13"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            EndDate = new DateTime(2023, 7, 6, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9708),
-                            ItemId = 14,
-                            StartDate = new DateTime(2023, 6, 15, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9707),
-                            UserId = "14"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            EndDate = new DateTime(2023, 7, 6, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9723),
-                            ItemId = 15,
-                            StartDate = new DateTime(2023, 6, 15, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9722),
-                            UserId = "15"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            EndDate = new DateTime(2023, 7, 6, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9739),
-                            ItemId = 16,
-                            StartDate = new DateTime(2023, 6, 15, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9738),
-                            UserId = "16"
-                        },
-                        new
-                        {
-                            Id = 17,
-                            EndDate = new DateTime(2023, 7, 6, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9755),
-                            ItemId = 17,
-                            StartDate = new DateTime(2023, 6, 15, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9754),
-                            UserId = "17"
-                        },
-                        new
-                        {
-                            Id = 18,
-                            EndDate = new DateTime(2023, 7, 6, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9772),
-                            ItemId = 18,
-                            StartDate = new DateTime(2023, 6, 15, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9771),
-                            UserId = "18"
-                        },
-                        new
-                        {
-                            Id = 19,
-                            EndDate = new DateTime(2023, 7, 6, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9812),
-                            ItemId = 19,
-                            StartDate = new DateTime(2023, 6, 15, 23, 35, 6, 722, DateTimeKind.Local).AddTicks(9811),
-                            UserId = "19"
                         });
                 });
 
@@ -764,122 +607,6 @@ namespace SoftwareDevelopment2.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Reservations");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ItemId = 1,
-                            UserId = "1"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ItemId = 2,
-                            UserId = "2"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ItemId = 3,
-                            UserId = "3"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ItemId = 4,
-                            UserId = "4"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            ItemId = 5,
-                            UserId = "5"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            ItemId = 6,
-                            UserId = "6"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            ItemId = 7,
-                            UserId = "7"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            ItemId = 8,
-                            UserId = "8"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            ItemId = 9,
-                            UserId = "9"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            ItemId = 10,
-                            UserId = "10"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            ItemId = 11,
-                            UserId = "11"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            ItemId = 12,
-                            UserId = "12"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            ItemId = 13,
-                            UserId = "13"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            ItemId = 14,
-                            UserId = "14"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            ItemId = 15,
-                            UserId = "15"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            ItemId = 16,
-                            UserId = "16"
-                        },
-                        new
-                        {
-                            Id = 17,
-                            ItemId = 17,
-                            UserId = "17"
-                        },
-                        new
-                        {
-                            Id = 18,
-                            ItemId = 18,
-                            UserId = "18"
-                        },
-                        new
-                        {
-                            Id = 19,
-                            ItemId = 19,
-                            UserId = "19"
-                        });
                 });
 
             modelBuilder.Entity("SoftwareDevelopment2.Models.Subscription", b =>

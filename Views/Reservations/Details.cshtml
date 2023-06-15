@@ -1,0 +1,47 @@
+﻿@model SoftwareDevelopment2.Models.Reservation
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Reservation</h4>
+    <hr />
+    <dl class="row">
+
+
+        @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+        {
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.UserId)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.UserId)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.ItemId)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.ItemId)
+            </dd>
+        }
+        
+    </dl>
+</div>
+
+@if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+{
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+        <a asp-controller="Mypage" asp-action="Index">Back to List</a>
+    </div>
+}
+else
+{
+    <div>
+        <a asp-controller="Mypage" asp-action="MyIndex">Back to List</a>
+    </div>
+}

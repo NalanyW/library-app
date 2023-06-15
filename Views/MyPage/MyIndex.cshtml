@@ -1,0 +1,123 @@
+﻿@model SoftwareDevelopment2.Controllers.MyPageViewModel
+
+@{
+    ViewData["Title"] = "Title";
+    ViewData["Author"] = "Author";
+    ViewData["Location"] = "Location";
+    ViewData["Year of Release"] = "Year of Release";
+    ViewData["Return Date"] = "Return Date";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Your Reservations</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.Display("Title")
+            </th>
+            <th>
+                @Html.Display("Author")
+            </th>
+            <th>
+                @Html.Display("Year of Release")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var reservation in Model.Reservations) {
+        <tr>
+            <td>
+                    @Html.DisplayFor(modelItem => reservation.Book.Title)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => reservation.Book.Author)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => reservation.Book.YearOfRelease)
+            </td>
+
+            @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+            {
+                <td>
+                        <a asp-controller="Reservations" asp-action="Edit" asp-route-id="@reservation.Reservation.Id">Edit</a> |
+                        <a asp-controller="Reservations" asp-action="Details" asp-route-id="@reservation.Reservation.Id">Details</a> |
+                        <a asp-controller="Reservations" asp-action="Delete" asp-route-id="@reservation.Reservation.Id">Delete</a>
+                </td>
+            }
+            else
+            {
+                <td>
+                        <a asp-controller="Reservations" asp-action="Delete" asp-route-id="@reservation.Reservation.Id">Delete</a>
+                </td>
+            }  
+        </tr>
+}
+
+
+
+    </tbody>
+</table>
+
+
+
+
+<h1>Your Loans</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.Display("Title")
+            </th>
+            <th>
+                @Html.Display("Author")
+            </th>
+            <th>
+                @Html.Display("Year of Release")
+            </th>
+            <th>
+                @Html.Display("Location")
+            </th>
+            <th>
+                @Html.Display("Return Date")
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var loan in Model.Loans)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => loan.Book.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => loan.Book.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => loan.Book.YearOfRelease)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => loan.Book.Location)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => loan.Loan.EndDate)
+                </td>
+
+                @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                {
+                    <td>
+                        <a asp-controller="Loans" asp-action="Edit" asp-route-id="@loan.Loan.Id">Edit</a> |
+                        <a asp-controller="Loans" asp-action="Details" asp-route-id="@loan.Loan.Id">Details</a> |
+                        <a asp-controller="Loans" asp-action="Delete" asp-route-id="@loan.Loan.Id">Delete</a>
+                    </td>
+                }
+            </tr>
+        }
+
+    </tbody>
+</table>

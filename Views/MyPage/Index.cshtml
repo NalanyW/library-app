@@ -1,0 +1,123 @@
+﻿@model SoftwareDevelopment2.Controllers.IndexViewModel
+
+@{
+    ViewData["UserId"] = "UserId";
+    ViewData["ItemId"] = "ItemId";
+    ViewData["StartDate"] = "Start Date";
+    ViewData["EndDate"] = "Return Date";
+    ViewData["Title"] = "Title";
+    ViewData["Author"] = "Author";
+    ViewData["Year of Release"] = "Year of Release";
+    ViewData["Return Date"] = "Return Date";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Your Reservations</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.Display("UserId")
+            </th>
+            <th>
+                @Html.Display("ItemId")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reservation in Model.Reservations)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => reservation.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => reservation.ItemId)
+                </td>
+
+                @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                {
+                    <td>
+                        <a asp-controller="Reservations" asp-action="Edit" asp-route-id="@reservation.Id">Edit</a> |
+                        <a asp-controller="Reservations" asp-action="Details" asp-route-id="@reservation.Id">Details</a> |
+                        <a asp-controller="Reservations" asp-action="Delete" asp-route-id="@reservation.Id">Delete</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <a asp-controller="Reservations" asp-action="Details" asp-route-id="@reservation.Id">Details</a> |
+                        <a asp-controller="Reservations" asp-action="Delete" asp-route-id="@reservation.Id">Delete</a>
+                    </td>
+                }
+            </tr>
+        }
+
+
+
+    </tbody>
+</table>
+
+
+
+
+<h1>Your Loans</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.Display("UserId")
+            </th>
+            <th>
+                @Html.Display("ItemId")
+            </th>
+            <th>
+                @Html.Display("StartDate")
+            </th>
+            <th>
+                @Html.Display("EndDate")
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var loan in Model.Loans)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => loan.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => loan.ItemId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => loan.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => loan.EndDate)
+                </td>
+
+                @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                {
+                    <td>
+                        <a asp-controller="Loans" asp-action="Edit" asp-route-id="@loan.Id">Edit</a> |
+                        <a asp-controller="Loans" asp-action="Details" asp-route-id="@loan.Id">Details</a> |
+                        <a asp-controller="Loans" asp-action="Delete" asp-route-id="@loan.Id">Delete</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <a asp-controller="Loans" asp-action="Details" asp-route-id="@loan.Id">Details</a> |
+                        <a asp-controller="Loans" asp-action="Delete" asp-route-id="@loan.Id">Delete</a>
+                    </td>
+                }
+            </tr>
+        }
+
+    </tbody>
+</table>
