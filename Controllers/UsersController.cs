@@ -4,32 +4,32 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SoftwareDevelopment2.Data;
 using SoftwareDevelopment2.Models;
+using System;
 
 namespace SoftwareDevelopment2.Controllers
 {
     [Authorize(Roles = "Employee, Admin")]
-    public class AdminController : Controller
+    public class UsersController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
         private readonly ApplicationDbContext _context;
 
-        public AdminController(UserManager<IdentityUser> userManager, ApplicationDbContext context)
+        public UsersController(UserManager<IdentityUser> userManager, ApplicationDbContext context)
         {
             this.userManager = userManager;
             _context = context;
         }
 
         [HttpGet]
-        public IActionResult ListUsers()
+        public IActionResult Index()
         {
             var users = userManager.Users;
             return View(users);
         }
 
 
-        // GET: Books/Edit/5
-        [Authorize]
-        public async Task<IActionResult> EditUser(string id)
+        // GET: Users/Edit/5
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.Users == null)
             {
@@ -46,19 +46,19 @@ namespace SoftwareDevelopment2.Controllers
             {
                 Id = id,
                 Email = user.Email,
-                PasswordHash = user.PasswordHash
+                PasswordHash = user.PasswordHash,
+                IsLocked = user.LockoutEnd > DateTime.UtcNow,
             };
 
             return View(userViewModel);
         }
 
-        // POST: Books/Edit/5
+        // POST: Users/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditUser(string id, [Bind("Email, PasswordHash, Id")] EditUserViewModel userViewModel)
+        public async Task<IActionResult> Edit(string id, [Bind("Email, PasswordHash, Id, IsLocked")] EditUserViewModel userViewModel)
         {
             if (id != userViewModel.Id)
             {
@@ -69,17 +69,28 @@ namespace SoftwareDevelopment2.Controllers
             {
                 return NotFound();
             }
-            user.Email = userViewModel.Email;
-            user.UserName = user.Email;
-            user.PasswordHash = userViewModel.PasswordHash;
-
 
             if (ModelState.IsValid)
             {
-                
                 try
                 {
-                    
+                    //set input values
+                    user.Email = userViewModel.Email;
+                    user.UserName = user.Email;
+                    user.PasswordHash = userViewModel.PasswordHash;
+
+                    // locks or unlocks users based on input
+                    if (userViewModel.IsLocked)
+                    {
+                        user.LockoutEnd = DateTime.UtcNow.AddYears(999);
+                        user.LockoutEnabled = true;
+                    }
+                    else
+                    {
+                        user.LockoutEnd = DateTime.Now;
+                        user.LockoutEnabled = false;
+                    }
+
                     _context.Update(user);
                     await _context.SaveChangesAsync();
                 }
@@ -94,15 +105,53 @@ namespace SoftwareDevelopment2.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(ListUsers));
+                return RedirectToAction(nameof(Index));
             }
             return View(user);
+        }
+
+        // GET: Users/Delete/5
+        public async Task<IActionResult> Delete(string? id)
+        {
+            if (id == null || _context.Users == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _context.Users
+                .FirstOrDefaultAsync(user => user.Id == id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+        }
+
+        // POST: Users/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            if (_context.Users == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Users'  is null.");
+            }
+            var user = await _context.Users.FindAsync(id);
+            if (user != null)
+            {
+                _context.Users.Remove(user);
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         private bool UserExists(string id)
         {
             return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
     }
 
     public class EditUserViewModel
@@ -110,6 +159,8 @@ namespace SoftwareDevelopment2.Controllers
         public string? Id { get; set; }
         public string? Email { get; set; }
         public string? PasswordHash { get; set; }
+        public bool IsLocked { get; set; }
+
         public EditUserViewModel() { }
     }
 }

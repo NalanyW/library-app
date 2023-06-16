@@ -17,7 +17,7 @@
         public int ExtendsInARow { get; set; }
         public float ReservationCost { get; set; }
         public float FinePerItemPerDay { get; set; }
-        public float SubscriptionCostPerMonth { get; set; }
+        public float CostPerMonth { get; set; }
 
         public Subscription() { }
     }

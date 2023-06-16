@@ -48,6 +48,6 @@ namespace SoftwareDevelopment2.Data
         }
 
 
-        public DbSet<SoftwareDevelopment2.Models.Author> Author { get; set; } = default!;
+        public DbSet<Author> Author { get; set; } = default!;
     }
 }
