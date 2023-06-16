@@ -42,12 +42,40 @@ namespace SoftwareDevelopment2.Controllers
                 return NotFound();
             }
 
+            var userRole = await _context.UserRoles.FirstOrDefaultAsync(userRole => userRole.UserId == id);
+            IdentityRole? role;
+
+            // if unable to find associated role, we assume user role
+            IdentityRole defaultRole = new IdentityRole
+            {
+                Name = "User"
+            };
+
+            if (userRole != null)
+            {
+                role = await _context.Roles.FirstOrDefaultAsync(role => role.Id == userRole.RoleId);
+                if (role == null)
+                {
+                    role = defaultRole;
+                }
+            }
+            else
+            {
+                role = defaultRole;
+            }
+
+            bool authorized =
+                User.IsInRole("Admin") ||
+                User.IsInRole("Employee") &&
+                role.Name == "User";
+
             var userViewModel = new EditUserViewModel
             {
                 Id = id,
                 Email = user.Email,
                 PasswordHash = user.PasswordHash,
                 IsLocked = user.LockoutEnd > DateTime.UtcNow,
+                Authorized = authorized
             };
 
             return View(userViewModel);
@@ -160,6 +188,7 @@ namespace SoftwareDevelopment2.Controllers
         public string? Email { get; set; }
         public string? PasswordHash { get; set; }
         public bool IsLocked { get; set; }
+        public bool Authorized { get; set; }
 
         public EditUserViewModel() { }
     }

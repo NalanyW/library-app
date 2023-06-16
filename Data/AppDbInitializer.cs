@@ -44,39 +44,53 @@ namespace SoftwareDevelopment2.Data
 				}
 
 
+                string email2 = "employee@mail.com";
+                string password2 = "Test123!";
 
-    //            if (!context.Books.Any())
-				//{
-				//	context.Books.AddRange(new List<Book>()
-				//	{
-				//		new Book()
-				//		{
-				//			Title = "Harry Potter and the Philosopher's Stone",
-				//			Author = "J.K Rowling",
-				//			Price = 8.99,
-				//			YearOfRelease = 1997,
-				//			Location = "verdieping1"
-				//		},
+                if (await userManager.FindByEmailAsync(email2) == null)
+                {
+                    var employee = new IdentityUser();
+                    employee.UserName = email2;
+                    employee.Email = email2;
+                    employee.EmailConfirmed = true;
 
-				//		new Book()
-				//		{
-				//			Title = "Harry Potter and the Chamber of Secrets",
-				//			Author = "J.K Rowling",
-				//			Price = 8.99,
-				//			YearOfRelease = 1998,
-				//			Location = "verdieping2"
-				//		},
+                    await userManager.CreateAsync(employee, password2);
 
-				//		new Book()
-				//		{
-				//			Title = "Harry Potter and the Prisoner of Azkaban",
-				//			Author = "J.K Rowling",
-				//			Price = 8.99,
-				//			YearOfRelease = 1999,
-				//			Location = "verdieping3"
-    //                    },
-    //                });
-    //            }
+                    await userManager.AddToRoleAsync(employee, "Employee");
+                }
+
+                //            if (!context.Books.Any())
+                //{
+                //	context.Books.AddRange(new List<Book>()
+                //	{
+                //		new Book()
+                //		{
+                //			Title = "Harry Potter and the Philosopher's Stone",
+                //			Author = "J.K Rowling",
+                //			Price = 8.99,
+                //			YearOfRelease = 1997,
+                //			Location = "verdieping1"
+                //		},
+
+                //		new Book()
+                //		{
+                //			Title = "Harry Potter and the Chamber of Secrets",
+                //			Author = "J.K Rowling",
+                //			Price = 8.99,
+                //			YearOfRelease = 1998,
+                //			Location = "verdieping2"
+                //		},
+
+                //		new Book()
+                //		{
+                //			Title = "Harry Potter and the Prisoner of Azkaban",
+                //			Author = "J.K Rowling",
+                //			Price = 8.99,
+                //			YearOfRelease = 1999,
+                //			Location = "verdieping3"
+                //                    },
+                //                });
+                //            }
 
                 //await AssignRoles(serviceScope.ServiceProvider, admin.Email, "Admin");
 
