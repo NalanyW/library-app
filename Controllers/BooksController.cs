@@ -51,13 +51,13 @@ namespace SoftwareDevelopment2.Controllers
             switch (search.SearchOn)
             {
                 case SearchOn.Title:
-                    return View("Index", bookViewModels.Where(book => book.Book.Title.Contains(search.SearchPhrase)));
+                    return View("Index", bookViewModels.Where(book => book.Book.Title.ToUpper().Contains(search.SearchPhrase.ToUpper())));
                 case SearchOn.Author:
 
-                    return View("Index", bookViewModels.Where(book => book.Author.Name.Contains(search.SearchPhrase)));
+                    return View("Index", bookViewModels.Where(book => book.Author.Name.ToUpper().Contains(search.SearchPhrase.ToUpper())));
                 case SearchOn.Location:
 
-                    return View("Index", bookViewModels.Where(book => book.Location.Name.Contains(search.SearchPhrase)));
+                    return View("Index", bookViewModels.Where(book => book.Location.Name.ToUpper().Contains(search.SearchPhrase.ToUpper())));
             }
 
             return View("Index", bookViewModels);

@@ -54,7 +54,6 @@ namespace SoftwareDevelopment2.Controllers
         }
 
         // GET: Reservations/Create/itemId
-        [Authorize(Roles = "Employee, Admin")]
         public async Task<IActionResult> Create(int? id)
         {
             if (id == null || _context.Books == null)
@@ -87,7 +86,6 @@ namespace SoftwareDevelopment2.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 
-        [Authorize(Roles = "Employee, Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(int id, [Bind("Id,UserId,ItemId")] Reservation reservation)
@@ -97,7 +95,11 @@ namespace SoftwareDevelopment2.Controllers
             {
                 _context.Add(reservation);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index), "MyPage");
+
+                // move to the right page based on user role
+                if (User.IsInRole("Employee") || User.IsInRole("Admin"))
+                    return RedirectToAction(nameof(Index), "MyPage");
+                return RedirectToAction("MyIndex", "MyPage");
             }
             return View(reservation);
         }

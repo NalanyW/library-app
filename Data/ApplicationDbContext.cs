@@ -23,8 +23,10 @@ namespace SoftwareDevelopment2.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            int amountToSeed = 20;
+
             base.OnModelCreating(builder);
-            for (int i = 1; i < 20; i++)
+            for (int i = 1; i < amountToSeed; i++)
             {
                 builder.Entity<Book>().HasData(
                     new Book { Id = i, Title = "Harry Potter: " + i.ToString(), AuthorId = i, YearOfRelease = 1997 + i, LocationId = i });
@@ -45,7 +47,7 @@ namespace SoftwareDevelopment2.Data
             // generate items
             builder
                 .Entity<Author>()
-                .HasData(fakeAuthors.GenerateBetween(20, 20));
+                .HasData(fakeAuthors.GenerateBetween(amountToSeed, amountToSeed));
 
             id = 1;
             var stock = new Faker<IdentityUser>()
@@ -58,7 +60,7 @@ namespace SoftwareDevelopment2.Data
             // generate Users
             builder
                 .Entity<IdentityUser>()
-                .HasData(stock.GenerateBetween(20, 20));
+                .HasData(stock.GenerateBetween(amountToSeed, amountToSeed));
         }
 
 

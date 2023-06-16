@@ -51,7 +51,13 @@
                     <a asp-action="Delete" asp-route-id="@item.Book.Id">Delete</a>
                 </td>
             }
-            
+            else
+            {
+                <td>
+                        <a asp-action="Details" asp-route-id="@item.Book.Id">Details</a>
+                </td>
+            }
+
         </tr>
 }
     </tbody>

@@ -4,6 +4,12 @@ using SoftwareDevelopment2.Models;
 namespace SoftwareDevelopment2.ViewModels
 {
 
+    // Use viewmodels because we can only send one object to the view.
+    // This way we can send multiple things as a bundle because they 
+    // are saved in one ViewModel object.
+
+
+    // Enum for deciding what to search on when searching for a book
     public enum SearchOn
     {
         Title,
@@ -69,9 +75,6 @@ namespace SoftwareDevelopment2.ViewModels
         }
     }
 
-    // Use a viewmodel because we can only send one object to the view.
-    // This way we can send multiple lists because they are saved in this
-    // one ViewModel object.
     public class MyPageViewModel
     {
         public IEnumerable<ReservationViewModel> Reservations { get; set; }

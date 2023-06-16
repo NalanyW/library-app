@@ -8,6 +8,10 @@ namespace SoftwareDevelopment2.Data
 {
 	public class AppDbInitializer
 	{
+		/// <summary>
+		/// Seeds the roles and 2 users. One admin user and one employee user
+		/// </summary>
+		/// <param name="applicationBuilder"></param>
 		public static async void SeedData(IApplicationBuilder applicationBuilder)
 		{
 			using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
@@ -59,79 +63,11 @@ namespace SoftwareDevelopment2.Data
                     await userManager.AddToRoleAsync(employee, "Employee");
                 }
 
-                //            if (!context.Books.Any())
-                //{
-                //	context.Books.AddRange(new List<Book>()
-                //	{
-                //		new Book()
-                //		{
-                //			Title = "Harry Potter and the Philosopher's Stone",
-                //			Author = "J.K Rowling",
-                //			Price = 8.99,
-                //			YearOfRelease = 1997,
-                //			Location = "verdieping1"
-                //		},
-
-                //		new Book()
-                //		{
-                //			Title = "Harry Potter and the Chamber of Secrets",
-                //			Author = "J.K Rowling",
-                //			Price = 8.99,
-                //			YearOfRelease = 1998,
-                //			Location = "verdieping2"
-                //		},
-
-                //		new Book()
-                //		{
-                //			Title = "Harry Potter and the Prisoner of Azkaban",
-                //			Author = "J.K Rowling",
-                //			Price = 8.99,
-                //			YearOfRelease = 1999,
-                //			Location = "verdieping3"
-                //                    },
-                //                });
-                //            }
-
-                //await AssignRoles(serviceScope.ServiceProvider, admin.Email, "Admin");
-
                 await context.SaveChangesAsync();
 
-                /*if (!context.Item.Any())
-				{
-					context.Item.AddRange(new List<Item>()
-					{
-						new Item()
-						{
-							*//*there needs to be a connection to the course*//*
-						},
-
-						new Item()
-						{
-							*//*there needs to be a connection to the course*//*
-						},
-
-						new Item()
-						{
-							*//*there needs to be a connection to the course*//*
-						},
-					});
-				}*/
-
-                /*if (!context.Roles.Any())
-				{
-
-				}*/
 
             }
         }
 
-        //public static async Task<IdentityResult> AssignRoles(IServiceProvider services, string email, string role)
-        //{
-        //    UserManager<IdentityUser> _userManager = services.GetService<UserManager<IdentityUser>>();
-        //    IdentityUser user = await _userManager.FindByEmailAsync(email);
-        //    var result = await _userManager.AddToRoleAsync(user, role);
-
-        //    return result;
-        //}
     }
 }

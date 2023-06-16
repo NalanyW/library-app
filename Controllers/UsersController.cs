@@ -65,6 +65,7 @@ namespace SoftwareDevelopment2.Controllers
                 role = defaultRole;
             }
 
+            // true if user is authorized to block account
             bool authorized =
                 User.IsInRole("Admin") ||
                 User.IsInRole("Employee") &&
