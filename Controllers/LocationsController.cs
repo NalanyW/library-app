@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,93 +10,87 @@ using SoftwareDevelopment2.Models;
 
 namespace SoftwareDevelopment2.Controllers
 {
-    public class AuthorsController : Controller
+    public class LocationsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public AuthorsController(ApplicationDbContext context)
+        public LocationsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Authors
+        // GET: Locations
         public async Task<IActionResult> Index()
         {
-              return _context.Authors != null ? 
-                          View(await _context.Authors.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Author'  is null.");
+              return _context.Locations != null ? 
+                          View(await _context.Locations.ToListAsync()) :
+                          Problem("Entity set 'ApplicationDbContext.Location'  is null.");
         }
-
-        // GET: Authors/Details/5
+        
+        // GET: Locations/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Authors == null)
+            if (id == null || _context.Locations == null)
             {
                 return NotFound();
             }
 
-            var author = await _context.Authors
+            var location = await _context.Locations
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (author == null)
+            if (location == null)
             {
                 return NotFound();
             }
 
-            return View(author);
+            return View(location);
         }
 
-        // GET: Authors/Create
-
-        [Authorize(Roles = "Employee, Admin")]
+        // GET: Locations/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Authors/Create
+        // POST: Locations/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Employee, Admin")]
-        public async Task<IActionResult> Create([Bind("Id,Name,Age")] Author author)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Location location)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(author);
+                _context.Add(location);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(author);
+            return View(location);
         }
 
-        // GET: Authors/Edit/5
-
-        [Authorize(Roles = "Employee, Admin")]
+        // GET: Locations/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Authors == null)
+            if (id == null || _context.Locations == null)
             {
                 return NotFound();
             }
 
-            var author = await _context.Authors.FindAsync(id);
-            if (author == null)
+            var location = await _context.Locations.FindAsync(id);
+            if (location == null)
             {
                 return NotFound();
             }
-            return View(author);
+            return View(location);
         }
 
-        // POST: Authors/Edit/5
+        // POST: Locations/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Employee, Admin")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Age")] Author author)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Location location)
         {
-            if (id != author.Id)
+            if (id != location.Id)
             {
                 return NotFound();
             }
@@ -106,12 +99,12 @@ namespace SoftwareDevelopment2.Controllers
             {
                 try
                 {
-                    _context.Update(author);
+                    _context.Update(location);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AuthorExists(author.Id))
+                    if (!LocationExists(location.Id))
                     {
                         return NotFound();
                     }
@@ -122,51 +115,49 @@ namespace SoftwareDevelopment2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(author);
+            return View(location);
         }
 
-        // GET: Authors/Delete/5
-        [Authorize(Roles = "Admin")]
+        // GET: Locations/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Authors == null)
+            if (id == null || _context.Locations == null)
             {
                 return NotFound();
             }
 
-            var author = await _context.Authors
+            var location = await _context.Locations
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (author == null)
+            if (location == null)
             {
                 return NotFound();
             }
 
-            return View(author);
+            return View(location);
         }
 
-        // POST: Authors/Delete/5
+        // POST: Locations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Authors == null)
+            if (_context.Locations == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Author'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.Location'  is null.");
             }
-            var author = await _context.Authors.FindAsync(id);
-            if (author != null)
+            var location = await _context.Locations.FindAsync(id);
+            if (location != null)
             {
-                _context.Authors.Remove(author);
+                _context.Locations.Remove(location);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AuthorExists(int id)
+        private bool LocationExists(int id)
         {
-          return (_context.Authors?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Locations?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

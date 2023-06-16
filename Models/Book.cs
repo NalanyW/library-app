@@ -4,9 +4,9 @@
     {
         //properties
         public string Title { get; set; }
-        public string Author { get; set; }
+        public int AuthorId { get; set; }
         public int YearOfRelease { get; set; }
-        public string Location { get; set; }
+        public int LocationId { get; set; }
         //contructor
         public Book()
         {

@@ -1,4 +1,5 @@
-﻿
+﻿@using SoftwareDevelopment2.ViewModels;
+@model SearchViewModel
 <h4>Search for a Book</h4>
 <hr />
 <div class="row">
@@ -8,7 +9,15 @@
                 <label for="SearchPhrase" class="control-label"></label>
                 <input name="SearchPhrase" class="form-control" />
             </div>
-            
+            <div class="form-group">
+                <label asp-for="SearchOn" class="control-label"></label>
+                <div class="col-md-10">
+                    <select asp-for="SearchOn" asp-items="Html.GetEnumSelectList<SearchOn>()">
+                        <option selected="selected" value="">Please select</option>
+                    </select>
+                    <span asp-validation-for="SearchOn" class="text-danger" />
+                </div>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Search" class="btn btn-primary" />
             </div>

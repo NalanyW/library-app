@@ -6,12 +6,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Versioning;
 using SoftwareDevelopment2.Data;
 using SoftwareDevelopment2.Models;
+using SoftwareDevelopment2.ViewModels;
 
 namespace SoftwareDevelopment2.Controllers
 {
+
     public class BooksController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -24,40 +28,52 @@ namespace SoftwareDevelopment2.Controllers
         // GET: Books
         public async Task<IActionResult> Index()
         {
-              return _context.Books != null ? 
-                          View(await _context.Books.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Book'  is null.");
+
+            return _context.Books != null ? 
+                View(await GetBookViewModels()) :
+                Problem("Entity set 'ApplicationDbContext.Book'  is null.");
         }
 
         // GET: Show form Books
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ShowSearchForm()
         {
-            return View();
+            return View(new SearchViewModel { });
         }
 
         // POST: form Books
-        public async Task<IActionResult> ShowSearchResult(string SearchPhrase)
+        public async Task<IActionResult> ShowSearchResult(SearchViewModel search)
         {
-            return View("Index", await _context.Books.Where(book => book.Title.Contains(SearchPhrase)).ToListAsync());
+            if (search.SearchPhrase == null)
+                return NotFound();
+
+            var bookViewModels = await GetBookViewModels();
+
+            switch (search.SearchOn)
+            {
+                case SearchOn.Title:
+                    return View("Index", bookViewModels.Where(book => book.Book.Title.Contains(search.SearchPhrase)));
+                case SearchOn.Author:
+
+                    return View("Index", bookViewModels.Where(book => book.Author.Name.Contains(search.SearchPhrase)));
+                case SearchOn.Location:
+
+                    return View("Index", bookViewModels.Where(book => book.Location.Name.Contains(search.SearchPhrase)));
+            }
+
+            return View("Index", bookViewModels);
         }
 
         // GET: Books/Details/5
-        public async Task<IActionResult> Details(int? id, ClaimsPrincipal user)
+        public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Books == null)
+            var bookViewModel = await GetBookViewModel(id);
+
+            if (bookViewModel == null)
             {
                 return NotFound();
             }
 
-            var book = await _context.Books
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (book == null)
-            {
-                return NotFound();
-            }
-
-            return View(book);
+            return View(bookViewModel);
         }
 
         // [] = Decorator
@@ -65,9 +81,19 @@ namespace SoftwareDevelopment2.Controllers
         [Authorize]
 
         // GET: Books/Create
-        public IActionResult Create()
+        [Authorize(Roles = "Employee, Admin")]
+        public async Task<IActionResult> Create()
         {
-            return View();
+            var createBookViewModel = new CreateBookViewModel
+            {
+                Book = new Book { },
+                Author = await _context.Authors.ToListAsync(),
+                Location = await _context.Locations.ToListAsync(),
+                AuthorChoice = new Author { },
+                LocationChoice = new Models.Location { }
+            };
+
+            return View(createBookViewModel);
         }
 
         // POST: Books/Create
@@ -77,10 +103,15 @@ namespace SoftwareDevelopment2.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Title,Author,Price,YearOfRelease,Location,Id")] Book book)
+        [Authorize(Roles = "Employee, Admin")]
+        public async Task<IActionResult> Create([Bind("Book, AuthorChoice, LocationChoice")] CreateBookViewModel bookViewModel)
         {
+            var book = bookViewModel.Book;
             if (ModelState.IsValid)
             {
+                
+                book.AuthorId = bookViewModel.AuthorChoice.Id;
+                book.LocationId = bookViewModel.LocationChoice.Id;
                 _context.Add(book);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -89,31 +120,28 @@ namespace SoftwareDevelopment2.Controllers
         }
 
         // GET: Books/Edit/5
-        [Authorize]
+        [Authorize(Roles = "Employee, Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Books == null)
+            var bookViewModel = await GetCreateBookViewModel(id);
+
+            if (bookViewModel == null)
             {
                 return NotFound();
             }
 
-            var book = await _context.Books.FindAsync(id);
-            if (book == null)
-            {
-                return NotFound();
-            }
-            return View(book);
+            return View(bookViewModel);
         }
 
         // POST: Books/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Title,Author,Price,YearOfRelease,Location,Id")] Book book)
+        [Authorize(Roles = "Employee, Admin")]
+        public async Task<IActionResult> Edit(int id, [Bind("Book, AuthorChoice, LocationChoice")] CreateBookViewModel bookViewModel)
         {
-            if (id != book.Id)
+            if (id != bookViewModel.Book.Id)
             {
                 return NotFound();
             }
@@ -122,12 +150,15 @@ namespace SoftwareDevelopment2.Controllers
             {
                 try
                 {
-                    _context.Update(book);
+                    var book = bookViewModel.Book;
+                    book.AuthorId = bookViewModel.AuthorChoice.Id;
+                    book.LocationId = bookViewModel.LocationChoice.Id;
+                    _context.Update(bookViewModel.Book);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BookExists(book.Id))
+                    if (!BookExists(bookViewModel.Book.Id))
                     {
                         return NotFound();
                     }
@@ -138,11 +169,11 @@ namespace SoftwareDevelopment2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(book);
+            return View(bookViewModel);
         }
 
         // GET: Books/Delete/5
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Books == null)
@@ -163,7 +194,7 @@ namespace SoftwareDevelopment2.Controllers
         // POST: Books/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Books == null)
@@ -184,5 +215,88 @@ namespace SoftwareDevelopment2.Controllers
         {
           return (_context.Books?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+        private async Task<IEnumerable<BookViewModel>> GetBookViewModels()
+        {
+            var books = await _context.Books.ToListAsync();
+
+            var authors = await _context.Authors.ToListAsync();
+            var locations = await _context.Locations.ToListAsync();
+
+            var bookViewModels = new List<BookViewModel>();
+            
+            //Find the correspond authors and locations for each book
+            foreach (var book in books)
+            {
+                var author = await _context.Authors.FirstOrDefaultAsync(author => author.Id == book.AuthorId);
+                var location = await _context.Locations.FirstOrDefaultAsync(location => location.Id == book.LocationId);
+                bookViewModels.Add(new BookViewModel
+                {
+                    Book = book,
+                    Author = author,
+                    Location = location,
+                });
+            }
+
+            return bookViewModels;
+        }
+        private async Task<BookViewModel?> GetBookViewModel(int? id)
+        {
+            if (id == null || _context.Books == null)
+            {
+                return null;
+            }
+            var book = await _context.Books.FindAsync(id);
+            if (book == null)
+            {
+                return null;
+            }
+            var author = await _context.Authors.FindAsync(book.AuthorId);
+            var location = await _context.Locations.FindAsync(book.LocationId);
+            if (author == null || location == null)
+            {
+                return null;
+            }
+
+            var bookViewModel = new BookViewModel
+            {
+                Book = book,
+                Author = author,
+                Location = location
+            };
+            return bookViewModel;
+        }
+
+        private async Task<CreateBookViewModel?> GetCreateBookViewModel(int? id)
+        {
+            if (id == null || _context.Books == null)
+            {
+                return null;
+            }
+            var book = await _context.Books.FindAsync(id);
+            if (book == null)
+            {
+                return null;
+            }
+            var author = await _context.Authors.FindAsync(book.AuthorId);
+            var location = await _context.Locations.FindAsync(book.LocationId);
+            if (author == null || location == null)
+            {
+                return null;
+            }
+
+            var bookViewModel = new CreateBookViewModel
+            {
+                Book = book,
+                Author = await _context.Authors.ToListAsync(),
+                Location = await _context.Locations.ToListAsync(),
+                AuthorChoice = author,
+                LocationChoice = location
+            };
+            return bookViewModel;
+        }
+
+
     }
+
 }

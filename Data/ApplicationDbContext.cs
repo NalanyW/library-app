@@ -27,13 +27,27 @@ namespace SoftwareDevelopment2.Data
             for (int i = 1; i < 20; i++)
             {
                 builder.Entity<Book>().HasData(
-                    new Book { Id = i, Title = "Harry Potter: " + i.ToString(), Author = "J.K. Rowling", YearOfRelease = 1997 + i, Location = "Verdieping " + i });
+                    new Book { Id = i, Title = "Harry Potter: " + i.ToString(), AuthorId = i, YearOfRelease = 1997 + i, LocationId = i });
                 builder.Entity<Loan>().HasData(
-                   new Loan { Id = i, UserId = i.ToString(), ItemId = i % 50, StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(21) });
+                   new Loan { Id = i, UserId = (i % 10).ToString(), ItemId = i, StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(21) });
                 builder.Entity<Reservation>().HasData(
-                   new Reservation { Id = i, UserId = i.ToString(), ItemId = i % 50 });
+                   new Reservation { Id = i*100, UserId = (i % 10).ToString(), ItemId = i });
+                builder.Entity<Location>().HasData(
+                   new Location { Id = i, Name = "Verdieping " + i.ToString() });
             }
+
             var id = 1;
+            var fakeAuthors = new Faker<Author>()
+                .RuleFor(author => author.Id, faker => id++)
+                .RuleFor(author => author.Name, faker => faker.Person.FullName)
+                .RuleFor(author => author.Age, faker => 50);
+
+            // generate items
+            builder
+                .Entity<Author>()
+                .HasData(fakeAuthors.GenerateBetween(20, 20));
+
+            id = 1;
             var stock = new Faker<IdentityUser>()
             .RuleFor(m => m.Id, faker => id++.ToString())
             .RuleFor(m => m.UserName, faker => faker.Person.Email)
@@ -41,13 +55,15 @@ namespace SoftwareDevelopment2.Data
             .RuleFor(m => m.EmailConfirmed, faker => true)
             .RuleFor(m => m.PasswordHash, faker => faker.Random.Hash());
 
-            // generate 100 items
+            // generate Users
             builder
                 .Entity<IdentityUser>()
-                .HasData(stock.GenerateBetween(10, 10));
+                .HasData(stock.GenerateBetween(20, 20));
         }
 
 
-        public DbSet<Author> Author { get; set; } = default!;
+        public DbSet<Author> Authors { get; set; } = default!;
+
+        public DbSet<Location> Locations { get; set; } = default!;
     }
 }

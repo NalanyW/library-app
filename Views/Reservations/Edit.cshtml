@@ -33,13 +33,13 @@
 @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
 {
     <div>
-        <a asp-action="Index">Back to List</a>
+        <a asp-controller="Mypage" asp-action="Index">Back to List</a>
     </div>
 }
 else
 {
     <div>
-        <a asp-action="MyIndex">Back to List</a>
+        <a asp-controller="Mypage"  asp-action="MyIndex">Back to List</a>
     </div>
 }
 

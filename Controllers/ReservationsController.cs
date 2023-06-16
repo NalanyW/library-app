@@ -11,10 +11,10 @@ using Microsoft.EntityFrameworkCore;
 using SoftwareDevelopment2.Data;
 using SoftwareDevelopment2.Models;
 using SoftwareDevelopment2.Utils;
+using SoftwareDevelopment2.Controllers;
 
 namespace SoftwareDevelopment2.Controllers
 {
-    [Authorize]
     public class ReservationsController : Controller
     {
         protected readonly ApplicationDbContext _context;
@@ -54,7 +54,7 @@ namespace SoftwareDevelopment2.Controllers
         }
 
         // GET: Reservations/Create/itemId
-        [Authorize]
+        [Authorize(Roles = "Employee, Admin")]
         public async Task<IActionResult> Create(int? id)
         {
             if (id == null || _context.Books == null)
@@ -86,7 +86,8 @@ namespace SoftwareDevelopment2.Controllers
         // POST: Reservations/Create/itemId
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
+
+        [Authorize(Roles = "Employee, Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(int id, [Bind("Id,UserId,ItemId")] Reservation reservation)
@@ -96,12 +97,13 @@ namespace SoftwareDevelopment2.Controllers
             {
                 _context.Add(reservation);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index), "Home");
+                return RedirectToAction(nameof(Index), "MyPage");
             }
             return View(reservation);
         }
 
         // GET: Reservations/Edit/5
+        [Authorize(Roles = "Employee, Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Reservations == null)
@@ -122,6 +124,7 @@ namespace SoftwareDevelopment2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employee, Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,ItemId")] Reservation reservation)
         {
             if (id != reservation.Id)
@@ -147,12 +150,13 @@ namespace SoftwareDevelopment2.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), "MyPage");
             }
             return View(reservation);
         }
 
         // GET: Reservations/Delete/5
+        [Authorize(Roles = "Employee, Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Reservations == null)
@@ -173,6 +177,7 @@ namespace SoftwareDevelopment2.Controllers
         // POST: Reservations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employee, Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Reservations == null)
@@ -186,7 +191,7 @@ namespace SoftwareDevelopment2.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), "MyPage");
         }
 
         private bool ReservationExists(int id)

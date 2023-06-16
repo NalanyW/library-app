@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SoftwareDevelopment2.Data;
 using SoftwareDevelopment2.Models;
+using SoftwareDevelopment2.ViewModels;
 using System;
 
 namespace SoftwareDevelopment2.Controllers
@@ -182,14 +183,4 @@ namespace SoftwareDevelopment2.Controllers
 
     }
 
-    public class EditUserViewModel
-    {
-        public string? Id { get; set; }
-        public string? Email { get; set; }
-        public string? PasswordHash { get; set; }
-        public bool IsLocked { get; set; }
-        public bool Authorized { get; set; }
-
-        public EditUserViewModel() { }
-    }
 }

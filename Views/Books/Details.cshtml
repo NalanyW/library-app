@@ -1,7 +1,10 @@
-﻿@model SoftwareDevelopment2.Models.Book
+﻿@model SoftwareDevelopment2.ViewModels.BookViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Title";
+    ViewData["Author"] = "Author";
+    ViewData["Location"] = "Location";
+    ViewData["Year of Release"] = "Year of Release";
 }
 
 <h1>Details</h1>
@@ -11,33 +14,33 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayNameFor(model => model.Book.Title)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
+            @Html.DisplayFor(model => model.Book.Title)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Author)
+            @Html.Display("Author")
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Author)
+            @Html.DisplayFor(model => model.Author.Name)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.YearOfRelease)
+            @Html.Display("Year of Release")
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.YearOfRelease)
+            @Html.DisplayFor(model => model.Book.YearOfRelease)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Location)
+            @Html.Display("Location")
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Location)
+            @Html.DisplayFor(model => model.Location.Name)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model?.Book.Id">Edit</a> |
     <a asp-action="Index">Back to List</a> |
-    <a asp-area="" asp-controller="Reservations" asp-action="Create" asp-route-id="@Model?.Id">Make Reservation</a>
+    <a asp-area="" asp-controller="Reservations" asp-action="Create" asp-route-id="@Model?.Book.Id">Make Reservation</a>
 </div>

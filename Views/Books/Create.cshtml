@@ -1,4 +1,4 @@
-﻿@model SoftwareDevelopment2.Models.Book
+﻿@model SoftwareDevelopment2.ViewModels.CreateBookViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -13,25 +13,39 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+                <label asp-for="Book.Title" class="control-label"></label>
+                <input asp-for="Book.Title" class="form-control" />
+                <span asp-validation-for="Book.Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Author" class="control-label"></label>
-                <input asp-for="Author" class="form-control" />
-                <span asp-validation-for="Author" class="text-danger"></span>
+                <label asp-for="AuthorChoice.Id" class="control-label"> Author: </label>
+                <select asp-for="AuthorChoice.Id"
+                        asp-items="@(new SelectList(Model.Author, nameof(Author.Id), nameof(Author.Name)))">
+                    <option>Please select Author</option>
+                </select>
+                <span asp-validation-for="AuthorChoice" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="YearOfRelease" class="control-label"></label>
-                <input asp-for="YearOfRelease" class="form-control" />
-                <span asp-validation-for="YearOfRelease" class="text-danger"></span>
+                <label asp-for="Book.YearOfRelease" class="control-label"></label>
+                <input asp-for="Book.YearOfRelease" class="form-control" />
+                <span asp-validation-for="Book.YearOfRelease" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Location" class="control-label"></label>
-                <input asp-for="Location" class="form-control" />
-                <span asp-validation-for="Location" class="text-danger"></span>
+                <label asp-for="LocationChoice.Id" class="control-label">Location: </label>
+                <select asp-for="LocationChoice.Id"
+                        asp-items="@(new SelectList(Model.Location, nameof(Location.Id), nameof(Location.Name)))">
+                    <option>Please select Location</option>
+                </select>
+                <span asp-validation-for="LocationChoice" class="text-danger"></span>
             </div>
+            <input type="hidden" asp-for="Book.Id" />
+            <input type="hidden" asp-for="Book.AuthorId" />
+            <input type="hidden" asp-for="Book.LocationId" />
+            <input type="hidden" asp-for="AuthorChoice.Age" />
+            <input type="hidden" asp-for="AuthorChoice.Name" />
+            <input type="hidden" asp-for="LocationChoice.Name" />
+            <input type="hidden" asp-for="Author" />
+            <input type="hidden" asp-for="Location" />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

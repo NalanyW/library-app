@@ -1,4 +1,4 @@
-﻿@model SoftwareDevelopment2.Controllers.MyPageViewModel
+﻿@model SoftwareDevelopment2.ViewModels.MyPageViewModel
 
 @{
     ViewData["Title"] = "Title";
@@ -33,7 +33,7 @@
                     @Html.DisplayFor(modelItem => reservation.Book.Title)
             </td>
             <td>
-                    @Html.DisplayFor(modelItem => reservation.Book.Author)
+                    @Html.DisplayFor(modelItem => reservation.Book.AuthorId)
             </td>
             <td>
                     @Html.DisplayFor(modelItem => reservation.Book.YearOfRelease)
@@ -93,13 +93,13 @@
                     @Html.DisplayFor(modelItem => loan.Book.Title)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => loan.Book.Author)
+                    @Html.DisplayFor(modelItem => loan.Book.AuthorId)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => loan.Book.YearOfRelease)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => loan.Book.Location)
+                    @Html.DisplayFor(modelItem => loan.Book.LocationId)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => loan.Loan.EndDate)

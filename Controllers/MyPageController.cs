@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using SoftwareDevelopment2.Data;
 using SoftwareDevelopment2.Models;
 using SoftwareDevelopment2.Utils;
+using SoftwareDevelopment2.ViewModels;
 
 namespace SoftwareDevelopment2.Controllers
 {
@@ -49,91 +50,36 @@ namespace SoftwareDevelopment2.Controllers
         }
         public async Task<IEnumerable<LoanViewModel>> GetLoanViewModels(IdentityUser user)
         {
-            //get list of only users' reservations and all books
+            //get list of only users' loans
             var loans = await _context.Loans.Where(loan => loan.UserId == user.Id).ToListAsync();
-            var books = await _context.Books.ToListAsync();
 
-            // list of all ID's of books we loaned
-            var loanBookIds = new List<int>();
+            var loanViewModels = new List<LoanViewModel>();
+
+            //find corresponding books for each loan
             foreach (var loan in loans)
             {
-                loanBookIds.Add(loan.ItemId);
+                var book = await _context.Books.FirstOrDefaultAsync(book => book.Id == loan.ItemId);
+                var loanViewModel = new LoanViewModel(loan, book);
+                loanViewModels.Add(loanViewModel);
             }
-
-            // list of all the book objects that the user has loaned
-            var myBooks = books.Where(book => loanBookIds.Contains(book.Id));
-
-            // zip is a sort of join between two lists. taking every element of both list and turning them into one element
-            // in this case turning loanbookids and mybooks into one list of reservationviewmodels.
-            var loanViewModels = myBooks.Zip(loans, (book, loan) => new LoanViewModel(loan, book));
             return loanViewModels;
         }
         public async Task<IEnumerable<ReservationViewModel>> GetReservationViewModels(IdentityUser user)
         {
-            //get list of only users' reservations and all books
-            var reservations = await _context.Reservations.Where(x => x.UserId == user.Id).ToListAsync();
-            var books = await _context.Books.ToListAsync();
-            var reservationBookIds = new List<int>();
+            //get list of only users' reservations 
+            var reservations = await _context.Reservations.Where(reservation => reservation.UserId == user.Id).ToListAsync();
+
+            var reservationViewModels = new List<ReservationViewModel>();
+
+            //find corresponding book for each reservation
             foreach (var reservation in reservations)
             {
-                reservationBookIds.Add(reservation.ItemId);
+                var book = await _context.Books.FirstOrDefaultAsync(book => book.Id == reservation.ItemId);
+                var loanViewModel = new ReservationViewModel(reservation, book);
+                reservationViewModels.Add(loanViewModel);
             }
-
-            var myBooks = books.Where(book => reservationBookIds.Contains(book.Id));
-
-            var reservationViewModels = myBooks.Zip(reservations, (book, reservation) => new ReservationViewModel(reservation, book));
             return reservationViewModels;
         }
     }
 
-    public class IndexViewModel
-    {
-        public IEnumerable<Reservation> Reservations { get; set; }
-        public IEnumerable<Loan> Loans { get; set; }
-
-        public IndexViewModel(IEnumerable<Reservation> reservationViewModel, IEnumerable<Loan> loanViewModel)
-        {
-            Reservations = reservationViewModel;
-            Loans = loanViewModel;
-        }
-    }
-
-    public class ReservationViewModel
-    {
-        public Reservation Reservation { get; set; }
-        public Book Book { get; set; }
-
-        public ReservationViewModel(Reservation reservation, Book book)
-        {
-            Reservation = reservation;
-            Book = book;
-        }
-    }
-
-    public class LoanViewModel
-    {
-        public Loan Loan { get; set; }
-        public Book Book { get; set; }
-
-        public LoanViewModel(Loan loan, Book book)
-        {
-            Loan = loan;
-            Book = book;
-        }
-    }
-
-    // Use a viewmodel because we can only send one object to the view.
-    // This way we can send multiple lists because they are saved in this
-    // one ViewModel object.
-    public class MyPageViewModel
-    {
-        public IEnumerable<ReservationViewModel> Reservations { get; set; }
-        public IEnumerable<LoanViewModel> Loans { get; set; }
-
-        public MyPageViewModel(IEnumerable<ReservationViewModel> reservationViewModel, IEnumerable<LoanViewModel> loanViewModel)
-        {
-            Reservations = reservationViewModel;
-            Loans = loanViewModel;
-        }
-    }
 }
