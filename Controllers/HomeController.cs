@@ -19,7 +19,6 @@ namespace SoftwareDevelopment2.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Admin")]
         public IActionResult Privacy()
         {
             return View();

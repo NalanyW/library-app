@@ -23,7 +23,7 @@ namespace SoftwareDevelopment2.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            int amountToSeed = 20;
+            int amountToSeed = 120;
 
             base.OnModelCreating(builder);
             for (int i = 1; i < amountToSeed; i++)
