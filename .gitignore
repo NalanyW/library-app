@@ -1,7 +1,11 @@
 .vs/
+*/.vs/
 obj
+*/obj
+*/bin
 bin
 packages
+*/packages
 *.suo
 *.user
 _ReSharper.*
