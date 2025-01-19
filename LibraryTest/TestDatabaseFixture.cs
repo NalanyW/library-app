@@ -44,7 +44,8 @@ namespace LibraryTest
                 var book = new Book();
                 book.Id = 1000 + i;
                 book.Title = "book" + i;
-                book.AuthorId = i;
+                book.AuthorId = 2000 + i;
+                book.LocationId = 3000 + i;
                 book.YearOfRelease = 2000 + i;
                 context.Books.Add(book);
             }
@@ -52,7 +53,7 @@ namespace LibraryTest
             for (int i = 0; i < 10; i++)
             {
                 var author = new Author();
-                author.Name = "author" + 1;
+                author.Name = "author" + i;
                 author.Age = 50 + i;
                 author.Id = 2000 + i;
                 context.Authors.Add(author);
