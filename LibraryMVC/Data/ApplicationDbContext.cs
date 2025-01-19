@@ -20,6 +20,8 @@ namespace SoftwareDevelopment2.Data
         public DbSet<Reservation> Reservations { get; set; } = default!;
         public DbSet<Subscription> Subscriptions { get; set; } = default!;
         public DbSet<Loan> Loans { get; set; } = default!;
+        public DbSet<Author> Authors { get; set; } = default!;
+        public DbSet<Location> Locations { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -92,9 +94,5 @@ namespace SoftwareDevelopment2.Data
         {
             return Locations.ToListAsync();
         }
-
-        public DbSet<Author> Authors { get; set; } = default!;
-
-        public DbSet<Location> Locations { get; set; } = default!;
     }
 }
