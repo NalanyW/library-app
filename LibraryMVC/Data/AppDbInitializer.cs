@@ -63,6 +63,21 @@ namespace SoftwareDevelopment2.Data
                     await userManager.AddToRoleAsync(employee, "Employee");
                 }
 
+                string email3 = "user@mail.com";
+                string password4 = "Password1!";
+
+                if (await userManager.FindByEmailAsync(email2) == null)
+                {
+                    var employee = new IdentityUser();
+                    employee.UserName = email2;
+                    employee.Email = email2;
+                    employee.EmailConfirmed = true;
+
+                    await userManager.CreateAsync(employee, password2);
+
+                    await userManager.AddToRoleAsync(employee, "User");
+                }
+
                 await context.SaveChangesAsync();
 
 
