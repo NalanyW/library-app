@@ -33,6 +33,10 @@ namespace LibraryTest
             Assert.NotNull(blog);
         }
 
-
+        [Fact]
+        public void TestBadge()
+        {
+            Assert.NotNull(null);
+        }
     }
 }
