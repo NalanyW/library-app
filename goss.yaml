@@ -1,0 +1,12 @@
+port:
+  tcp:80:
+    listening: false
+  tcp:443:
+    listening: false
+service:
+  sshd:
+    enabled: true
+    running: true
+user:
+  ubuntu:
+    exists: true
