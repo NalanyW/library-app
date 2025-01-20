@@ -1,10 +1,30 @@
-port:
-  tcp:7258:
-    listening: true
-service:
-  dotnet:
-    enabled: true
-    running: true
-user:
-  ubuntu:
-    exists: true
+# goss.yaml
+servers:
+  localhost:
+    listen: 8080
+    protocols:
+      - http
+
+# Tests to check the health of the application
+tests:
+  # Test if the application is running on port 7258
+  - name: "Check if application is running on port 7258"
+    port:
+      name: "port 8080"
+      port: 7258
+      protocol: tcp
+      state: listening
+
+  # Test if the application responds to a basic HTTP request 
+  - name: "Check if the application responds to a GET request"
+    http:
+      url: "http://localhost:8080"
+      method: "GET"
+      status: 200
+      timeout: 10s
+
+  # Check if the file `database.db` exists
+  - name: "Check if the database.db file exists"
+    file:
+      path: "./database.db"  
+      exists: true
