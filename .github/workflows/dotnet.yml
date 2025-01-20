@@ -21,14 +21,14 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
       
-    - name: Run Formatter
-      run: dotnet format --verbosity diagnostic
-      
     - name: Build
       run: dotnet build --no-restore
       
     - name: Test
       run: dotnet test --no-build --verbosity normal
+      
+    - name: Run Formatter
+      run: dotnet format --verbosity diagnostic
 
     - name: Run
       run: dotnet run --project ./LibraryMVC/SoftwareDevelopment2.csproj
