@@ -1,19 +1,17 @@
 
 # Test if the application is running on port 7258
 port:
-  name: "port 8080"
-  port: 7258
-  protocol: tcp
-  state: listening
+  tcp:8080:
+    listening: true
+    ip:
+    - localhost
 
-# Test if the application responds to a basic HTTP request 
-http:
-  url: "http://localhost:8080"
-  method: "GET"
-  status: 200
-  timeout: 10s
+file:
+  /wwwroot:
+    filetype: directory
+    exists: true
 
   # Check if the file `database.db` exists
-file:
-  path: "./database.db"  
-  exists: true
+  file:
+    /database.db: 
+      exists: true
