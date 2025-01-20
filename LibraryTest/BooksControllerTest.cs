@@ -10,7 +10,7 @@ namespace LibraryTest
     {
         public TestDatabaseFixture Fixture { get; } = fixture;
 
-        // tests whether a book exists in the db after we create it
+        // tests whether a book exists in the db after we create it.
         [Fact]
         public async Task TestCreateBook()
         {
