@@ -1,5 +1,5 @@
 
-name: Build and Push and Test Docker Image
+name: Testing Docker Image with Goss
 
 on:
   push:
