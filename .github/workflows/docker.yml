@@ -56,13 +56,16 @@ jobs:
       - name: Run GOSS tests
         run: goss validate
         env:
-          GOSS_FILES_PATH: ./goss.yaml  # Make sure goss.yaml is available or use inline configuration
+          GOSS_FILES_PATH: ./goss.yaml 
 
       # Step 7: Run GOSS tests
       - name: Run health check
         run: 
           goss serve &
           curl localhost:8080/healthz
+        env:
+          GOSS_FILES_PATH: ./goss.yaml  
+
   
       # Step 8: Clean up: Stop and remove the Docker container
       - name: Clean up Docker container
