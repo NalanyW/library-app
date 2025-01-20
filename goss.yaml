@@ -9,10 +9,14 @@ port:
 
 file:
 # Check if the directory `wwwroot` exists
-  /app/wwwroot:
+  /LibraryMVC/wwwroot:
     filetype: directory
     exists: true
 
 # Check if the file `database.db` exists
-  /app/database.db: 
+  /LibraryMVC/database.db: 
+    exists: true
+  /LibraryMVC/database.db-shm: 
+    exists: true
+  /LibraryMVC/database.db-wal: 
     exists: true
