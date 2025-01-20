@@ -1,5 +1,5 @@
 
-# Test if the application is running on port 7258
+# Test if the application is running on port 8081
 port:
   tcp:8081:
     listening: true
