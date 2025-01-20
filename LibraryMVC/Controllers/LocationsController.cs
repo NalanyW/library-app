@@ -22,11 +22,11 @@ namespace SoftwareDevelopment2.Controllers
         // GET: Locations
         public async Task<IActionResult> Index()
         {
-              return _context.Locations != null ? 
-                          View(await _context.Locations.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Location'  is null.");
+            return _context.Locations != null ?
+                        View(await _context.Locations.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Location'  is null.");
         }
-        
+
         // GET: Locations/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -150,14 +150,14 @@ namespace SoftwareDevelopment2.Controllers
             {
                 _context.Locations.Remove(location);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool LocationExists(int id)
         {
-          return (_context.Locations?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Locations?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

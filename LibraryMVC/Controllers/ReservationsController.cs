@@ -18,10 +18,10 @@ namespace SoftwareDevelopment2.Controllers
     public class ReservationsController : Controller
     {
         protected readonly ApplicationDbContext _context;
-        
+
 
         public ReservationsController(ApplicationDbContext context)
-        { 
+        {
             _context = context;
         }
 
@@ -29,9 +29,9 @@ namespace SoftwareDevelopment2.Controllers
         [Authorize(Roles = "Employee, Admin")]
         public async Task<IActionResult> Index()
         {
-              return _context.Reservations != null ? 
-                          View(await _context.Reservations.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Reservations'  is null.");
+            return _context.Reservations != null ?
+                        View(await _context.Reservations.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Reservations'  is null.");
         }
 
 
@@ -73,8 +73,8 @@ namespace SoftwareDevelopment2.Controllers
                 return NotFound();
             }
 
-            Reservation reservation = new Reservation() 
-            { 
+            Reservation reservation = new Reservation()
+            {
                 UserId = user.Id,
                 ItemId = book.Id,
             };
@@ -191,14 +191,14 @@ namespace SoftwareDevelopment2.Controllers
             {
                 _context.Reservations.Remove(reservation);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index), "MyPage");
         }
 
         private bool ReservationExists(int id)
         {
-          return (_context.Reservations?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Reservations?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

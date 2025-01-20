@@ -22,7 +22,7 @@ namespace SoftwareDevelopment2.Controllers
             return View(indexViewModel);
         }
 
-        public MyPageController(ApplicationDbContext context) 
+        public MyPageController(ApplicationDbContext context)
         {
             _context = context;
         }

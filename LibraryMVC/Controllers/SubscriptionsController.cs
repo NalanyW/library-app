@@ -23,9 +23,9 @@ namespace SoftwareDevelopment2.Controllers
         // GET: Subscriptions
         public async Task<IActionResult> Index()
         {
-              return _context.Subscriptions != null ? 
-                          View(await _context.Subscriptions.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Subscription'  is null.");
+            return _context.Subscriptions != null ?
+                        View(await _context.Subscriptions.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Subscription'  is null.");
         }
 
         // GET: Subscriptions/Details/5
@@ -157,14 +157,14 @@ namespace SoftwareDevelopment2.Controllers
             {
                 _context.Subscriptions.Remove(subscription);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool SubscriptionExists(int id)
         {
-          return (_context.Subscriptions?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Subscriptions?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

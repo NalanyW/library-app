@@ -35,7 +35,7 @@ namespace SoftwareDevelopment2.Data
                 builder.Entity<Loan>().HasData(
                    new Loan { Id = i, UserId = (i % 10).ToString(), ItemId = i, StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(21) });
                 builder.Entity<Reservation>().HasData(
-                   new Reservation { Id = i*100, UserId = (i % 10).ToString(), ItemId = i });
+                   new Reservation { Id = i * 100, UserId = (i % 10).ToString(), ItemId = i });
                 builder.Entity<Location>().HasData(
                    new Location { Id = i, Name = "Verdieping " + i.ToString() });
             }

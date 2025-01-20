@@ -23,9 +23,9 @@ namespace SoftwareDevelopment2.Controllers
         // GET: Authors
         public async Task<IActionResult> Index()
         {
-              return _context.Authors != null ? 
-                          View(await _context.Authors.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Author'  is null.");
+            return _context.Authors != null ?
+                        View(await _context.Authors.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Author'  is null.");
         }
 
         // GET: Authors/Details/5
@@ -159,14 +159,14 @@ namespace SoftwareDevelopment2.Controllers
             {
                 _context.Authors.Remove(author);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool AuthorExists(int id)
         {
-          return (_context.Authors?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Authors?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LibraryTest
 {
     public class BooksControllerTest(TestDatabaseFixture fixture) : IClassFixture<TestDatabaseFixture>
-    { 
+    {
         public TestDatabaseFixture Fixture { get; } = fixture;
 
         // tests whether a book exists in the db after we create it
@@ -122,7 +122,7 @@ namespace LibraryTest
             search.SearchPhrase = "BOOK1";
 
             // call the method we are testing
-            ViewResult view = (ViewResult) await controller.ShowSearchResult(search);
+            ViewResult view = (ViewResult)await controller.ShowSearchResult(search);
 
             context.ChangeTracker.Clear();
 

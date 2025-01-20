@@ -6,46 +6,46 @@ using System.Data;
 
 namespace SoftwareDevelopment2.Data
 {
-	public class AppDbInitializer
-	{
-		/// <summary>
-		/// Seeds the roles and 2 users. One admin user and one employee user
-		/// </summary>
-		/// <param name="applicationBuilder"></param>
-		public static async void SeedData(IApplicationBuilder applicationBuilder)
-		{
-			using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
-			{
-				var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+    public class AppDbInitializer
+    {
+        /// <summary>
+        /// Seeds the roles and 2 users. One admin user and one employee user
+        /// </summary>
+        /// <param name="applicationBuilder"></param>
+        public static async void SeedData(IApplicationBuilder applicationBuilder)
+        {
+            using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
 
-				context.Database.EnsureCreated();
+                context.Database.EnsureCreated();
 
-				var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-                string[] roles = new string[] { "Admin", "Employee", "User"};
+                string[] roles = new string[] { "Admin", "Employee", "User" };
 
                 for (int i = 0; i < roles.Length; i++)
                 {
-					if (!await roleManager.RoleExistsAsync(roles[i]))
-						await roleManager.CreateAsync(new IdentityRole(roles[i]));
+                    if (!await roleManager.RoleExistsAsync(roles[i]))
+                        await roleManager.CreateAsync(new IdentityRole(roles[i]));
                 }
 
-				var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+                var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
 
-				string email = "admin@admin.com";
-				string password = "Test1234,";
+                string email = "admin@admin.com";
+                string password = "Test1234,";
 
-				if (await userManager.FindByEmailAsync(email) == null)
-				{
-					var admin = new IdentityUser();
-					admin.UserName = email;
-					admin.Email = email;
-					admin.EmailConfirmed = true;
+                if (await userManager.FindByEmailAsync(email) == null)
+                {
+                    var admin = new IdentityUser();
+                    admin.UserName = email;
+                    admin.Email = email;
+                    admin.EmailConfirmed = true;
 
-					await userManager.CreateAsync(admin, password);
+                    await userManager.CreateAsync(admin, password);
 
-					await userManager.AddToRoleAsync(admin, "Admin");
-				}
+                    await userManager.AddToRoleAsync(admin, "Admin");
+                }
 
 
                 string email2 = "employee@mail.com";

@@ -29,7 +29,7 @@ namespace SoftwareDevelopment2.Controllers
         public async Task<IActionResult> Index()
         {
 
-            return _context.Books != null ? 
+            return _context.Books != null ?
                 View(await GetBookViewModels()) :
                 Problem("Entity set 'ApplicationDbContext.Book'  is null.");
         }
@@ -109,7 +109,7 @@ namespace SoftwareDevelopment2.Controllers
             var book = bookViewModel.Book;
             if (ModelState.IsValid)
             {
-                
+
                 book.AuthorId = bookViewModel.AuthorChoice.Id;
                 book.LocationId = bookViewModel.LocationChoice.Id;
                 _context.Add(book);
@@ -206,14 +206,14 @@ namespace SoftwareDevelopment2.Controllers
             {
                 _context.Books.Remove(book);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool BookExists(int id)
         {
-          return (_context.Books?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Books?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
         private async Task<IEnumerable<BookViewModel>> GetBookViewModels()
@@ -224,7 +224,7 @@ namespace SoftwareDevelopment2.Controllers
             var locations = await _context.Locations.ToListAsync();
 
             var bookViewModels = new List<BookViewModel>();
-            
+
             //Find the correspond authors and locations for each book
             foreach (var book in books)
             {
