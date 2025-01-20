@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Build and Push and Test Docker Image
 
 on:
   push:
@@ -57,6 +57,12 @@ jobs:
         run: goss validate
         env:
           GOSS_FILES_PATH: ./goss.yaml  # Make sure goss.yaml is available or use inline configuration
+
+      # Step 7: Run GOSS tests
+      - name: Run health check
+        run: 
+          goss serve &
+          curl localhost:8080/healthz
   
       # Step 8: Clean up: Stop and remove the Docker container
       - name: Clean up Docker container
