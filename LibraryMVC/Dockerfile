@@ -46,6 +46,8 @@ ENV LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8
 WORKDIR /app
 
+COPY ./goss/goss.yaml /app/goss/goss.yaml
+
 COPY ./database.db /app/database.db
 COPY ./database.db-shm /app/database.db-shm
 COPY ./database.db-wal /app/database.db-wal
