@@ -22,6 +22,7 @@ jobs:
       
       - name: Pull Docker image and run test
         run: |
+          docker ps
           docker run -d -p 8089:80 nalanyw/my-image:main
           goss validate
 
