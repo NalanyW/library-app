@@ -22,10 +22,11 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
       
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v3
-      with:
-        languages: csharp
+    - name: Super-linter
+      uses: super-linter/super-linter@v7.2.1 # x-release-please-version
+      env:
+        # To report GitHub Actions status checks
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Build
       run: dotnet build --no-restore
     - name: Test
