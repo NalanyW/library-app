@@ -61,7 +61,7 @@ jobs:
       # Step 7: Run GOSS tests
       - name: Run health check
         run: |
-          goss serve
+          goss serve &
           curl localhost:8080/healthz
         env:
           GOSS_FILES_PATH: ./goss.yaml  
