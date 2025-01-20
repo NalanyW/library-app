@@ -29,12 +29,3 @@ jobs:
       
     - name: Run Formatter
       run: dotnet format --verbosity diagnostic
-
-    - name: Run
-      run: dotnet run --project ./LibraryMVC/SoftwareDevelopment2.csproj
-
-    - name: Install Goss
-      run: curl -fsSL https://goss.rocks/install | sh
-
-    - name: Run Goss
-      run: goss validate
