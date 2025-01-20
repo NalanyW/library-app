@@ -69,6 +69,7 @@ jobs:
   
       # Step 8: Clean up: Stop and remove the Docker container
       - name: Clean up Docker container
-        run: |
+        run:
+          ls
           docker ps -q --filter "ancestor=nalanyw/my-image:maint" | xargs docker stop
           docker ps -a -q --filter "ancestor=nalanyw/my-image:main" | xargs docker rm
