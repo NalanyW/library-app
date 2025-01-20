@@ -21,7 +21,7 @@ jobs:
           curl -fsSL https://goss.rocks/install | sh
       
       - name: Pull Docker image and run test
-        run: dgoss run nalanyw/my-image:main 
+        run: dgoss run nalanyw/my-image:main --httpPort=8081
 
       - name: Run health check
         run: |
