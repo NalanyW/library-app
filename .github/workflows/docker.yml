@@ -44,7 +44,7 @@ jobs:
   
       - name: Run Docker container
         run: |
-          docker run -d -p 7258:80 nalanyw/my-image:main  # Adjust port mappings if necessary
+          docker run -d -p 8080:80 nalanyw/my-image:main  # Adjust port mappings if necessary
           sleep 10  # Give the container some time to start up
   
       # Step 6: Install GOSS
