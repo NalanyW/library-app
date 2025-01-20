@@ -6,7 +6,7 @@ http:
 
 file:
 # Check if the directory `wwwroot` exists
-  /LibraryMVC/wwwroot:
+  /app/wwwroot:
     filetype: directory
     exists: true
 
