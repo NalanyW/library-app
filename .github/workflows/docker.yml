@@ -38,3 +38,29 @@ jobs:
           annotations: ${{ steps.meta.outputs.annotations }}
           provenance: true
           sbom: true
+          
+      - name: Pull Docker image
+        run: docker pull nalanyw/my-image:main  # Replace with your actual image
+  
+      - name: Run Docker container
+        run: |
+          docker run -d -p 7258:80 nalanyw/my-image:main  # Adjust port mappings if necessary
+          sleep 10  # Give the container some time to start up
+  
+      # Step 6: Install GOSS
+      - name: Install GOSS
+        run: |
+          curl -Lo /usr/local/bin/goss https://github.com/aelsabbahy/goss/releases/download/v0.3.17/goss-linux-amd64
+          chmod +x /usr/local/bin/goss
+  
+      # Step 7: Run GOSS tests
+      - name: Run GOSS tests
+        run: goss validate
+        env:
+          GOSS_FILES_PATH: ./goss.yaml  # Make sure goss.yaml is available or use inline configuration
+  
+      # Step 8: Clean up: Stop and remove the Docker container
+      - name: Clean up Docker container
+        run: |
+          docker ps -q --filter "ancestor=nalanyw/my-image:maint" | xargs docker stop
+          docker ps -a -q --filter "ancestor=nalanyw/my-image:main" | xargs docker rm
