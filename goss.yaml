@@ -1,11 +1,8 @@
 
-# Test if the application is running on port 8081
-port:
-  tcp:8089:
-    listening: true
-    ip:
-    - 0.0.0.0
-
+http:
+  check80:
+    url: http://localhost/home
+    status: 200
 
 file:
 # Check if the directory `wwwroot` exists
@@ -14,9 +11,9 @@ file:
     exists: true
 
 # Check if the file `database.db` exists
-  /LibraryMVC/database.db: 
+  /app/database.db: 
     exists: true
-  /LibraryMVC/database.db-shm: 
+  /app/database.db-shm: 
     exists: true
-  /LibraryMVC/database.db-wal: 
+  /app/database.db-wal: 
     exists: true
