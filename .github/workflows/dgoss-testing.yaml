@@ -1,0 +1,29 @@
+
+name: Build and Push and Test Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install GOSS
+        run: |
+          curl -fsSL https://goss.rocks/install | sh
+      
+      - name: Pull Docker image and run test
+        run: dgoss run nalanyw/my-image:main 
+        env:
+          GOSS_FILES_PATH: ./goss.yaml 
+
+      - name: Run health check
+        run: |
+          goss serve &
+          curl localhost:8080/healthz
+        env:
+          GOSS_FILES_PATH: ./goss.yaml  
+
+  
