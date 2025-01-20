@@ -3,7 +3,7 @@ name: Testing Docker Image with Goss
 
 on:
   workflow_run:
-    workflows: ["Build And Push Docker Image"]
+    workflows: ["Build and Push Docker Image"]
     branches: [main]
     types: 
       - completed
