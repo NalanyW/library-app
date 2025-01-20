@@ -12,6 +12,10 @@ jobs:
 
     runs-on: ubuntu-latest
     
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ['csharp']
 
     steps:
     - uses: actions/checkout@v4
@@ -22,8 +26,19 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
       
-    - name: Run Analyzer
+    - name: Run Formatter
       run: dotnet format --verbosity diagnostic
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v1
+      with:
+        languages: ${{ matrix.language }}
+
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v1
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v1
       
     - name: Build
       run: dotnet build --no-restore
