@@ -7,16 +7,16 @@ port:
     - 0.0.0.0
 
 
-file:
-# Check if the directory `wwwroot` exists
-  /LibraryMVC/wwwroot:
-    filetype: directory
-    exists: true
+# file:
+# # Check if the directory `wwwroot` exists
+#   /LibraryMVC/wwwroot:
+#     filetype: directory
+#     exists: true
 
-# Check if the file `database.db` exists
-  /LibraryMVC/database.db: 
-    exists: true
-  /LibraryMVC/database.db-shm: 
-    exists: true
-  /LibraryMVC/database.db-wal: 
-    exists: true
+# # Check if the file `database.db` exists
+#   /LibraryMVC/database.db: 
+#     exists: true
+#   /LibraryMVC/database.db-shm: 
+#     exists: true
+#   /LibraryMVC/database.db-wal: 
+#     exists: true
