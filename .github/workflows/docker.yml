@@ -9,6 +9,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Install GOSS
+        run: |
+          curl -fsSL https://goss.rocks/install | sh
+      
+      - name: Pull Docker image
+        run: dgoss run nalanyw/my-image:main 
+    
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -38,7 +45,7 @@ jobs:
           annotations: ${{ steps.meta.outputs.annotations }}
           provenance: true
           sbom: true
-          
+        
       - name: Pull Docker image
         run: docker pull nalanyw/my-image:main  # Replace with your actual image
   
@@ -46,11 +53,6 @@ jobs:
         run: |
           docker run -d -p 8081:80 nalanyw/my-image:main  # Adjust port mappings if necessary
           sleep 5  # Give the container some time to start up
-  
-      # Step 6: Install GOSS
-      - name: Install GOSS
-        run: |
-          curl -fsSL https://goss.rocks/install | sh
   
       # Step 7: Run GOSS tests
       - name: Run GOSS tests
