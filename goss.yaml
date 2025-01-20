@@ -7,13 +7,12 @@ port:
     - localhost
 
 
-# Check if the directory `wwwroot` exists
 file:
+# Check if the directory `wwwroot` exists
   /wwwroot:
     filetype: directory
     exists: true
 
 # Check if the file `database.db` exists
-file:
   /database.db: 
     exists: true
