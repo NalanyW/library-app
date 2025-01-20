@@ -16,14 +16,10 @@ jobs:
       
       - name: Pull Docker image and run test
         run: dgoss run nalanyw/my-image:main 
-        env:
-          GOSS_FILES_PATH: ./goss.yaml 
 
       - name: Run health check
         run: |
           goss serve &
           curl localhost:8080/healthz
-        env:
-          GOSS_FILES_PATH: ./goss.yaml  
 
   
