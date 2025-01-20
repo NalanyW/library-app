@@ -72,5 +72,5 @@ jobs:
         run: |
           ls
           docker ps
-          docker ps -q --filter "ancestor=nalanyw/my-image:maint" | xargs docker stop
+          docker ps -q --filter "ancestor=nalanyw/my-image:main" | xargs docker stop
           docker ps -a -q --filter "ancestor=nalanyw/my-image:main" | xargs docker rm
