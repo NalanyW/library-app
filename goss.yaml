@@ -1,7 +1,7 @@
 
 # Test if the application is running on port 8081
 port:
-  tcp:8081:
+  tcp:8089:
     listening: true
     ip:
     - 0.0.0.0
