@@ -4,15 +4,15 @@ port:
   tcp:8080:
     listening: true
     ip:
-    - localhost
+    - localhost:8080
 
 
 file:
 # Check if the directory `wwwroot` exists
-  /wwwroot:
+  /app/wwwroot:
     filetype: directory
     exists: true
 
 # Check if the file `database.db` exists
-  /database.db: 
+  /app/database.db: 
     exists: true
