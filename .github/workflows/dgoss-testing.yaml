@@ -10,6 +10,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    
+      - name: Checkout
+        uses: actions/checkout@v4
+        
       - name: Install GOSS
         run: |
           curl -fsSL https://goss.rocks/install | sh
