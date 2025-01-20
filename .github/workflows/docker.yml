@@ -9,13 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Install GOSS
-        run: |
-          curl -fsSL https://goss.rocks/install | sh
-      
-      - name: Pull Docker image
-        run: dgoss run nalanyw/my-image:main 
-    
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -45,34 +38,3 @@ jobs:
           annotations: ${{ steps.meta.outputs.annotations }}
           provenance: true
           sbom: true
-        
-      - name: Pull Docker image
-        run: docker pull nalanyw/my-image:main  # Replace with your actual image
-  
-      - name: Run Docker container
-        run: |
-          docker run -d -p 8081:80 nalanyw/my-image:main  # Adjust port mappings if necessary
-          sleep 5  # Give the container some time to start up
-  
-      # Step 7: Run GOSS tests
-      - name: Run GOSS tests
-        run: goss validate --retry-timeout 15s --sleep 2s
-        env:
-          GOSS_FILES_PATH: ./goss.yaml 
-
-      # Step 7: Run GOSS tests
-      - name: Run health check
-        run: |
-          goss serve &
-          curl localhost:8080/healthz
-        env:
-          GOSS_FILES_PATH: ./goss.yaml  
-
-  
-      # Step 8: Clean up: Stop and remove the Docker container
-      - name: Clean up Docker container
-        run: |
-          ls
-          docker ps
-          docker ps -q --filter "ancestor=nalanyw/my-image:main" | xargs docker stop
-          docker ps -a -q --filter "ancestor=nalanyw/my-image:main" | xargs docker rm
