@@ -213,7 +213,7 @@ namespace SoftwareDevelopment2.Controllers
 
         private bool BookExists(int id)
         {
-            return (_context.Books?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Locations?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
         private async Task<IEnumerable<BookViewModel>> GetBookViewModels()
