@@ -8,7 +8,7 @@ namespace LibraryTest
     {
         public TestDatabaseFixture Fixture { get; } = fixture;
 
-        // tests whether a Author exists in the db after we create it
+        // tests whether a Author exists in the db after we create it 
         [Fact]
         public async Task TestCreateAuthor()
         {
