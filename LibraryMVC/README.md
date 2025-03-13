@@ -1,9 +1,9 @@
 ![Build and Test](https://github.com/NalanyW/library-app/actions/workflows/dotnet.yml/badge.svg)
 ![Docker release and deploy](https://github.com/NalanyW/library-app/actions/workflows/docker.yml/badge.svg)
 
-  
 
-Inloggen.
+
+Inloggen:
 
 Admin
 Email: admin@admin.com
