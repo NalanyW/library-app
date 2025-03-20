@@ -10,7 +10,7 @@ namespace LibraryTest
 
         // tests whether a Author exists in the db after we create it
         [Fact]
-        public async Task TestCreateAuthor() 
+        public async Task TestCreateAuthor()
         {
             using var context = Fixture.CreateContext();
             context.Database.BeginTransaction();
