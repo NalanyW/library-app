@@ -3,14 +3,14 @@ name: "Code Quality"
 on:
   push:
     branches: [main]
-    paths:
-    - '**.cs'
-    - '**.csproj'
   pull_request:
     branches: [main]
     paths:
     - '**.cs'
     - '**.csproj'
+
+permissions:
+  actions: read
 
 jobs:
   analyze:
